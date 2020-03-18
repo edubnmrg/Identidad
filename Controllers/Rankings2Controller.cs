@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Identidad.Models;
 using Identidad.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,13 +20,14 @@ namespace Identidad.Controllers
         }
 
         // GET: Rankings
+        [AllowAnonymous]
         public async Task<IActionResult> Index(int? id)
         {
             Rankings2VM RankVM = new Rankings2VM();
             RankVM.Categorias = await _context.Categorias
                 .Where(c => c.categoriaID <8)
                 .ToListAsync();
-       
+            RankVM.Rankings = new List<Ranking2>();
             if(id == null)
             {
                 RankVM.CategoriaActiva = 0;
@@ -46,7 +48,7 @@ namespace Identidad.Controllers
             
             foreach(var r in ran)
             {
-                if(r.CategoriaID == RankVM.CategoriaActiva)
+                if(r.CategoriaID == RankVM.Categorias[RankVM.CategoriaActiva].categoriaID)
                 {
                     Ranking2 r2 = new Ranking2();
                     r2.CategoriaID = r.CategoriaID;
