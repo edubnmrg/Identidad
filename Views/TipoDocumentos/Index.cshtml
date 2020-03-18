@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TipoDocumento>
+
+@{
+    ViewData["Title"] = "Tipos de Documento";
+}
+    <div class="container-fluid" style="margin-left:3EM">
+
+        <h1>Tipos de Documento</h1>
+
+        <p>
+            <a asp-action="Create" class="font2">Agregar</a>
+        </p>
+        <table class="table table-striped font2">
+            <thead class="table-dark">
+                <tr class="font2b">
+                    <th>
+                        @Html.DisplayNameFor(model => model.tipoDeDocumento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Abreviacion)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="font2">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tipoDeDocumento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Abreviacion)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Eliminar</a>
+                        </td>
+                    </tr>
+                 }
+        </tbody>
+    </table>
+    </div>

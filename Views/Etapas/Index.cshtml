@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Identidad.Models.Recursos.Etapa>
+
+@{
+    ViewData["Title"] = "Etapas";
+}
+
+<h1>Etapas</h1>
+
+<p>
+    <a class="font2" asp-action="Create">Agregar</a>
+</p>
+<table class="table table-striped">
+    <thead class="table-dark font2b">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreEtapa)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="font2">
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreEtapa)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EtapaId">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.EtapaId">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

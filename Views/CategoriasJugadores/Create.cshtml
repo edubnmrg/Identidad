@@ -1,0 +1,43 @@
+﻿@model Identidad.Models.CategoriaJugador
+
+@{
+    ViewData["Title"] = "Agregar Categoria Jugador";
+}
+
+    <h1>Agregar Categoria Jugador</h1>
+
+<hr />
+<div class="row font2">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PerfilFK" class="control-label font2b">Jugador</label>
+                <select asp-for="PerfilFK" class="form-control font2" asp-items="ViewBag.PerfilFK"></select>
+            </div>
+         
+            <div class="form-group">
+                <label asp-for="JuegoFK" class="control-label font2b">Juego</label>
+                <select asp-for="JuegoFK" class="form-control font2" asp-items="ViewBag.JuegoFK">
+                    <option value="">Elija el Juego...</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoriaFK" class="control-label font2b">Categoria</label>
+                <select asp-for="CategoriaFK" class="form-control font2" asp-items="ViewBag.CategoriaFK">
+                    <option value="">Elija la Categoria...</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary font2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="font2 " asp-action="Index">Volver a la Lista</a>
+</div>
+

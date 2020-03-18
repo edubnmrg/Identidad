@@ -1,0 +1,35 @@
+﻿@model Identidad.Models.PresidenteClub
+
+@{
+    ViewData["Title"] = "Eliminar Presidente";
+}
+    <div class="container-fluid" style="margin-left:2EM">
+        <h1>Eliminar Presidente</h1>
+
+        <h3>Esta seguro de eliminar este Presidente?</h3>
+        <div>
+            <h4>PresidenteClub</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Club)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Club.NombreClub)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Perfil)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Perfil.NombreCompleto)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="PresClubID" />
+                <input type="submit" value="Delete" class="btn btn-danger font2" />
+            </form>
+            <a class="font2" asp-action="Index">Volver a la Lista</a>
+
+        </div>
+    </div>

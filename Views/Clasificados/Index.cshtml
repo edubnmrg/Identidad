@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Identidad.Models.Clasificado>
+
+@{
+    ViewData["Title"] = "Clasificados";
+}
+
+    <h1>Clasificados</h1>
+
+
+<table class="table table-striped" style="margin-left=2EM">
+    <thead class="table-dark font2b">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TorneoID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Perfil.NombreCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Puesto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Promedio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="font2">
+            <td>
+                @Html.DisplayFor(modelItem => item.TorneoID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Perfil.NombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Puesto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Promedio)
+            </td>
+            <td>
+                <a class="font2" asp-action="Edit" asp-route-id="@item.ClasificadoID">Editar</a> |
+                <a class="font2" asp-action="Delete" asp-route-id="@item.ClasificadoID">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,33 @@
+﻿@model Identidad.Models.Recursos.CategoriaTorneo
+
+@{
+    ViewData["Title"] = "Editar Categorias Torneos";
+}
+<div class="container-fluid" style="margin-left:3EM">
+
+    <h1>Editar Categorias Torneos</h1>
+
+
+    <hr />
+    <div class="row font2">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="catTorneoID" />
+                <div class="form-group">
+                    <label asp-for="catTorneo" class="control-label font2b"></label>
+                    <input asp-for="catTorneo" class="form-control font2" />
+                    <span asp-validation-for="catTorneo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary font2" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <a class="font2 " asp-action="Index">Volver a la Lista</a>
+    </div>
+
+</div>

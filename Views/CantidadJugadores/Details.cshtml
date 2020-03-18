@@ -1,0 +1,25 @@
+﻿@model Identidad.Models.Recursos.CantidadJugadores
+
+@{
+    ViewData["Title"] = "Detalle Cantidad Jugadores";
+}
+    <div class="container-fluid" style="margin-left:3EM">
+
+        <h1>Detalle Cantidad Jugadores</h1>
+
+        <div class="font2">
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.cantJug)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.cantJug)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a class="font2 " asp-action="Edit" asp-route-id="@Model.cantJugID">Editar</a> <br />
+            <a class="font2 " asp-action="Index">Volver a la Lista</a>
+        </div>
+        </div>

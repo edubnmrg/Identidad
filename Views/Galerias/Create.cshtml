@@ -1,0 +1,48 @@
+﻿@model Identidad.ViewModels.GaleriaViewModel
+
+@{
+    ViewData["Title"] = "Agregar Foto";
+}
+<div class="container-fluid" style="margin-left:3EM">
+
+    <h1>Agregar Foto</h1>
+
+    <h4>Galeria</h4>
+    <hr />
+    <div class="row font2">
+        <div class="col-md-12">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <img id="nuevaFoto" style="width:100%" /><br />
+                <input type="text" asp-for="FotoPath" value="------" />
+
+                <div class="form-group">
+                    <label asp-for="Photo" class="control-label">Imagen</label>
+
+                    <div class="custom-file">
+                        <input asp-for="Photo" class="form-control custom-file-input font2" style="width:auto" onchange="readURL(this,$(document.getElementById('nuevaFoto')));">
+                        <label class="custom-file-label font2">Elija una foto...</label>
+                    </div>                <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Fecha" class="control-label"></label>
+                    <input type="date" asp-for="Fecha" value="@DateTime.Now" class="form-control font2" />
+                    <span asp-validation-for="Fecha" class="text-danger"></span>
+                </div>
+                <div class="form-group font2" style="min-height:2rem; width:100%">
+                    <label asp-for="Nota" class="control-label"></label>
+                    <input asp-for="Nota" class="form-control font2" />
+                    <span asp-validation-for="Nota" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Agregar" class="btn btn-primary font2" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a class="font2" asp-action="Index">Volver a la Lista</a>
+    </div>
+
+    </div>

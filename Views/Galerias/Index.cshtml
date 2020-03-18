@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Identidad.Models.Galeria>
+
+@{
+    ViewData["Title"] = "Galeria";
+}
+
+<h1>Galeria</h1>
+
+<p class="font2">
+    <a asp-action="Create">Agregar</a>
+</p>
+<div class="container-fluid" style="margin-left=2EM">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FotoPath)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fecha)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nota)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var photoPath = "~/img/Galeria/" + (item.FotoPath ?? "5q.png");
+
+                <tr class="font2">
+                    <td>
+                        <img id="@item.GaleriaId" src="@photoPath" style="border:2px solid;max-height:100px" asp-append-version="true" />
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nota)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.GaleriaId">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.GaleriaId">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

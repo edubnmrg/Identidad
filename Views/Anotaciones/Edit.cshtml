@@ -1,0 +1,41 @@
+﻿@model Identidad.Models.Anotacion
+
+@{
+    ViewData["Title"] = "Editar Inscripciones";
+}
+
+<h1>Editar Inscripciones</h1>
+
+<hr />
+<div class="row font2">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AnotacionID" />
+            <div class="form-group">
+                <label asp-for="PerfilRefId" class="control-label"></label>
+                <select asp-for="PerfilRefId" class="form-control font2" asp-items="ViewBag.PerfilRefId">
+                    <option value="@Model.PerfilRefId"></option>
+
+                </select>
+                <span asp-validation-for="PerfilRefId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TorneoRefId" class="control-label"></label>
+                <select asp-for="TorneoRefId" class="form-control font2" asp-items="ViewBag.TorneoRefId">
+                    <option value="@Model.TorneoRefId"></option>
+
+                </select>
+                <span asp-validation-for="TorneoRefId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary font2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="font2" asp-action="Index">Volver a la LIsta</a>
+</div>
+

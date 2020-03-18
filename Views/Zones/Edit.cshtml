@@ -1,0 +1,44 @@
+﻿@model Identidad.Models.Zone
+
+@{
+    ViewData["Title"] = "Editar Zona";
+}
+    <div style="margin-left:3EM">
+        <h1>Editar Zona</h1>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ZonaID" />
+                    <div class="form-group">
+                        <label asp-for="TorneoID" class="control-label font2b"></label>
+                        <select asp-for="TorneoID" class="form-control font2" asp-items="ViewBag.TorneoID">
+                            <option value="@Model.TorneoID"></option>
+
+                        </select>
+                        <span asp-validation-for="TorneoID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Numero" class="control-label font2b"></label>
+                        <input asp-for="Numero" class="form-control font2" />
+                        <span asp-validation-for="Numero" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CantidadJugadores" class="control-label font2b"></label>
+                        <input asp-for="CantidadJugadores" class="form-control font2" />
+                        <span asp-validation-for="CantidadJugadores" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar" class="btn btn-primary font2" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a class="font2" asp-action="Index">Volver a la Lista</a>
+        </div>
+
+    </div>

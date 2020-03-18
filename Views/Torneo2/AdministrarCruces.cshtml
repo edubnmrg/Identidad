@@ -1,0 +1,145 @@
+﻿@model Identidad.ViewModels.CrucesViewModel;
+@{
+    ViewData["Title"] = "Administrar Cruces";
+    int desde = 0;
+    int hasta = 0;
+    int xpagina = 6;
+
+    hasta = Math.Min(desde + xpagina, Model.Partidos.Count());
+    string ancho = Model.Torneo.SisTor.CantSets > 1 ? "3EM" : "4EM";
+}
+    <div class="container-fluid" style="margin-left:3EM">
+
+        <h1>Administrar Cruces - @Model.Torneo.NombreTorneo</h1>
+
+        <div class="container" style="margin-left=3EM">
+            <form method="post" asp-action="AdministrarCruces" asp-route-id="@Model.Torneo.TorneoID" enctype="multipart/form-data">
+                <input type="hidden" asp-for="@Model.Torneo.TorneoID" value="@Model.Torneo.TorneoID" />
+                <input type="hidden" asp-for="@Model.Torneo.SisTor.sisTorID" value="@Model.Torneo.SisTor.sisTorID" />
+
+                <input type="hidden" asp-for="@Model.Torneo.SisTor.CantSets" value="@Model.Torneo.SisTor.CantSets" />
+                <input type="hidden" asp-for="@Model.Torneo.SisTor.Puntos" value="@Model.Torneo.SisTor.Puntos" />
+                <input type="hidden" asp-for="@Model.Torneo.JuegoID" value="@Model.Torneo.JuegoID" />
+                <input type="hidden" asp-for="@Model.Torneo.Hasta" value="@Model.Torneo.Hasta" />
+
+                <div class="row font2">
+                    @for (int i = desde; i < hasta; i++)
+                    {
+                        <div class="card text-center">
+                            <div class="card-header">
+                                @Model.Partidos[i].Perfil1.NombreTorneo.ToUpper()
+                                <input type="hidden" asp-for="@Model.Partidos[i].Jugador1Id" value="@Model.Partidos[i].Jugador1Id" />
+                                <input type="hidden" asp-for="@Model.Partidos[i].EtapaId" value="@Model.Partidos[i].EtapaId" />
+                                <input type="hidden" asp-for="@Model.Partidos[i].Cerrado" value="@Model.Partidos[i].Cerrado" />
+                                <input type="hidden" asp-for="@Model.Partidos[i].Ganador" value="@Model.Partidos[i].Ganador" />
+                                <input type="hidden" asp-for="@Model.Partidos[i].TorneoID" value="@Model.Partidos[i].TorneoID" />
+                                <input type="hidden" asp-for="@Model.Partidos[i].Ronda" value="@Model.Partidos[i].Ronda" />
+                                <input type="hidden" asp-for="@Model.Partidos[i].PartidoId" value="@Model.Partidos[i].PartidoId" />
+
+
+                            </div>
+                            <div class="card-body">
+                                <table class="table-striped">
+                                    <thead class="table-dark">
+                                        <tr >
+                                            @if (Model.Partidos[i].Cerrado)
+                                            {
+                                                for (int s = 0; s < Model.Partidos[i].Scores.Count(); s++)
+                                                {
+                                                    <th style="width:@ancho">
+                                                        @(s + 1)
+                                                    </th>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                for (int s = 0; s < Model.Torneo.SisTor.CantSets; s++)
+                                                {
+                                                    <th style="width:@ancho">
+                                                        @(s + 1)
+                                                    </th>
+                                                }
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @if (Model.Partidos[i].Cerrado)
+                                            {
+                                                for (int s = 0; s < Model.Partidos[i].Scores.Count(); s++)
+                                                {
+                                                    <td style="width:@ancho">
+                                                        @Model.Partidos[i].Scores[s].Score1
+                                                        <input type="hidden" asp-for="@Model.Partidos[i].Scores[s].Score1" value="@Model.Partidos[i].Scores[s].Score1" />
+
+                                                    </td>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                for (int s = 0; s < Model.Torneo.SisTor.CantSets; s++)
+                                                {
+
+                                                    int identidad = Model.Torneo.TorneoID * 100000000 + 10000 + 100 * i + 1;
+
+                                                    <td style="width:@ancho">
+
+                                                        <input type="number" id="@identidad" asp-for="@Model.Partidos[i].Scores[s].Score1" min="0" max="@Model.Torneo.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Torneo.SisTor.Puntos)" />
+                                                    </td>
+                                                }
+                                            }
+                                        </tr>
+                                        <tr>
+                                            @if (Model.Partidos[i].Cerrado)
+                                            {
+                                                for (int s = 0; s < Model.Partidos[i].Scores.Count(); s++)
+                                                {
+                                                    <td style="width:@ancho">
+                                                        @Model.Partidos[i].Scores[s].Score2
+                                                        <input type="hidden" asp-for="@Model.Partidos[i].Scores[s].Score2" value="@Model.Partidos[i].Scores[s].Score2" />
+
+                                                    </td>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                for (int s = 0; s < Model.Torneo.SisTor.CantSets; s++)
+                                                {
+
+                                                    int identidad = Model.Torneo.TorneoID * 100000000 + 20000 + 100 * i + 1;
+
+                                                    <td style="width:@ancho">
+
+                                                        <input type="number" id="@identidad" asp-for="@Model.Partidos[i].Scores[s].Score2" min="0" max="@Model.Torneo.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Torneo.SisTor.Puntos)" />
+                                                    </td>
+                                                }
+                                            }
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="card-footer">
+                                @Model.Partidos[i].Perfil.NombreTorneo.ToUpper()
+                                <input type="hidden" asp-for="@Model.Partidos[i].Jugador2Id" value="@Model.Partidos[i].Jugador2Id" />
+
+                            </div>
+                        </div>
+                    }
+                </div>
+                @if (!Model.Torneo.CrucesCerrados)
+                {
+                    <button type="submit" id="actualizar" class="btn btn-primary font2">Actualizar Resultados</button>
+
+                }
+
+                @{int tId = Model.Torneo.TorneoID * 100 + 1;}
+                <a class="btn btn-primary font2" asp-action="Administrar" asp-route-id="@tId">Zonas</a>
+                @if (Model.Torneo.CrucesCerrados)
+                {
+                    <a class="btn btn-primary font2" asp-action="AdministrarEliminatoria" asp-route-id="@Model.Torneo.TorneoID">Eliminatoria</a>
+
+                }
+            </form>
+        </div>
+</div>

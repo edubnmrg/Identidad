@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Identidad.Models.PresidenteFederacion>
+
+@{
+    ViewData["Title"] = "Presidentes Federacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="container-fluid" style="margin-left:2EM">
+
+        <h1>Presidentes Federacion</h1>
+
+        <p>
+            <a class="font2" asp-action="Create">Agregar</a>
+        </p>
+        <table class="table-striped font2">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        Federacion
+                    </th>
+                    <th>
+                        Presidente
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Federacion.nombre)
+                        </td>
+                        <td>
+                             @item.Perfil.NombreCompleto.ToUpper();
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.PresFedID">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.PresFedID">Detalle</a> |
+                            <a asp-action="Delete" asp-route-id="@item.PresFedID">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>

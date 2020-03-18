@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Identidad.Models.Recursos.SistemaTorneo>
+
+@{
+    ViewData["Title"] = "Sistemas Torneos";
+}
+<div class="container-fluid" style="margin-left:3EM">
+
+    <h1>Sistemas de Torneos</h1>
+
+    <p>
+        <a class="font2 " asp-action="Create">Agregar</a>
+    </p>
+    <table class="table table-striped font2">
+        <thead class="table-dark">
+            <tr class=font2b>
+                <th>
+                    @Html.DisplayNameFor(model => model.sisTor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CantSets)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Puntos)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sisTor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CantSets)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Puntos)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.sisTorID">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.sisTorID">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>

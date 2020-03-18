@@ -1,0 +1,1333 @@
+﻿@model Identidad.Models.Torneo2
+@{
+    ViewData["Title"] = "AdministrarEliminatoria";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+        string ancho = Model.SisTor.CantSets > 1 ? "3EM" : "4EM";
+
+}
+
+<div style="margin-left:3EM">
+    <h1>Eliminatoria - @ViewData["Nombre"]</h1>
+    <form method="post" name="zonasform" asp-action="AdministrarEliminatoria" asp-route-id="@Model.TorneoID" enctype="multipart/form-data">
+        <input type="hidden" asp-for="@Model.SisTorRefId" value="@Model.SisTorRefId" />
+        <input type="hidden" asp-for="@Model.Hasta" value="@Model.Hasta" />
+        <input type="hidden" asp-for="@Model.TorneoID" value="@Model.TorneoID" />
+
+        <div class="row" style="flex-wrap:nowrap">
+            <div class="col-md-6" style="text-align:center;  width:auto">
+                <div style="text-align:center; border:solid; width:auto">
+                    <h2>@Model.Matches[0].Perfil1.NombreTorneo.ToUpper()</h2>
+                    <input type="hidden" asp-for="@Model.Matches[0].PartidoId" value="@Model.Matches[0].PartidoId" />
+                    <input type="hidden" asp-for="@Model.Matches[0].Jugador1Id" value="@Model.Matches[0].Jugador1Id" />
+                    <input type="hidden" asp-for="@Model.Matches[0].Jugador2Id" value="@Model.Matches[0].Jugador2Id" />
+                    <input type="hidden" asp-for="@Model.Matches[0].EtapaId" value="@Model.Matches[0].EtapaId" />
+                    <input type="hidden" asp-for="@Model.Matches[0].Ronda" value="@Model.Matches[0].Ronda" />
+                    <input type="hidden" asp-for="@Model.Matches[0].TorneoID" value="@Model.Matches[0].TorneoID" />
+                    <input type="hidden" asp-for="@Model.Matches[0].ZonaId" value="@Model.Matches[0].ZonaId" />
+                    <input type="hidden" asp-for="@Model.Matches[0].PartidoNumero" value="@Model.Matches[0].PartidoNumero" />
+                    <input type="hidden" asp-for="@Model.Matches[0].Cerrado" value="@Model.Matches[0].Cerrado" />
+                    <input type="hidden" asp-for="@Model.Matches[0].Ganador" value="@Model.Matches[0].Ganador" />
+
+
+
+
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[0].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[0].Scores.Count(); i++)
+                                {
+                                    string identidad = (0 * 10000 + 100 + i).ToString().Trim();
+                                    if (!Model.Matches[0].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[0].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[0].Scores[i].NumeroSet" value="@Model.Matches[0].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[0].Scores[i].PartidoId" value="@Model.Matches[0].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[0].Scores[i].ScoreId" value="@Model.Matches[0].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[0].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[0].Scores[i].Score1" value="@Model.Matches[0].Scores[i].Score1" />
+
+                            </td>
+                                    }
+
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[0].Scores.Count(); i++)
+                                {
+                                    string identidad = (0 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[0].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[0].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[0].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[0].Scores[i].Score2" value="@Model.Matches[0].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>@Model.Matches[0].Perfil.NombreTorneo.ToUpper()</h2>
+
+                </div>
+
+                <br />
+                <div style="text-align:center; border:solid; width:auto">
+
+                    <h2>@Model.Matches[7].Perfil1.NombreTorneo.ToUpper()</h2>
+                    <input type="hidden" asp-for="@Model.Matches[7].PartidoId" value="@Model.Matches[7].PartidoId" />
+                    <input type="hidden" asp-for="@Model.Matches[7].Jugador1Id" value="@Model.Matches[7].Jugador1Id" />
+                    <input type="hidden" asp-for="@Model.Matches[7].Jugador2Id" value="@Model.Matches[7].Jugador2Id" />
+                    <input type="hidden" asp-for="@Model.Matches[7].EtapaId" value="@Model.Matches[7].EtapaId" />
+                    <input type="hidden" asp-for="@Model.Matches[7].Ronda" value="@Model.Matches[7].Ronda" />
+                    <input type="hidden" asp-for="@Model.Matches[7].TorneoID" value="@Model.Matches[7].TorneoID" />
+                    <input type="hidden" asp-for="@Model.Matches[7].ZonaId" value="@Model.Matches[7].ZonaId" />
+                    <input type="hidden" asp-for="@Model.Matches[7].PartidoNumero" value="@Model.Matches[7].PartidoNumero" />
+                    <input type="hidden" asp-for="@Model.Matches[7].Cerrado" value="@Model.Matches[7].Cerrado" />
+                    <input type="hidden" asp-for="@Model.Matches[7].Ganador" value="@Model.Matches[7].Ganador" />
+
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[7].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[7].Scores.Count(); i++)
+                                {
+                                    string identidad = (7 * 10000 + 100 + i).ToString().Trim();
+                                    if (!Model.Matches[7].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[7].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[7].Scores[i].NumeroSet" value="@Model.Matches[7].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[7].Scores[i].PartidoId" value="@Model.Matches[7].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[7].Scores[i].ScoreId" value="@Model.Matches[7].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                            @Model.Matches[7].Scores[i].Score1
+                                            <input type="hidden" asp-for="@Model.Matches[7].Scores[i].Score1" value="@Model.Matches[7].Scores[i].Score1" />
+
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[7].Scores.Count(); i++)
+                                {
+                                    string identidad = (7 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[7].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[7].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                            @Model.Matches[7].Scores[i].Score2
+                                            <input type="hidden" asp-for="@Model.Matches[7].Scores[i].Score2" value="@Model.Matches[0].Scores[i].Score2" />
+
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>@Model.Matches[7].Perfil.NombreTorneo.ToUpper()</h2>
+
+
+                </div>
+                <br />
+
+                <div style="text-align:center; border:solid; width:auto">
+                    <h2>@Model.Matches[6].Perfil1.NombreTorneo.ToUpper()</h2>
+                    <input type="hidden" asp-for="@Model.Matches[6].PartidoId" value="@Model.Matches[6].PartidoId" />
+                    <input type="hidden" asp-for="@Model.Matches[6].Jugador1Id" value="@Model.Matches[6].Jugador1Id" />
+                    <input type="hidden" asp-for="@Model.Matches[6].Jugador2Id" value="@Model.Matches[6].Jugador2Id" />
+                    <input type="hidden" asp-for="@Model.Matches[6].EtapaId" value="@Model.Matches[6].EtapaId" />
+                    <input type="hidden" asp-for="@Model.Matches[6].Ronda" value="@Model.Matches[6].Ronda" />
+                    <input type="hidden" asp-for="@Model.Matches[6].TorneoID" value="@Model.Matches[6].TorneoID" />
+                    <input type="hidden" asp-for="@Model.Matches[6].ZonaId" value="@Model.Matches[6].ZonaId" />
+                    <input type="hidden" asp-for="@Model.Matches[6].PartidoNumero" value="@Model.Matches[6].PartidoNumero" />
+                    <input type="hidden" asp-for="@Model.Matches[6].Cerrado" value="@Model.Matches[6].Cerrado" />
+                    <input type="hidden" asp-for="@Model.Matches[6].Ganador" value="@Model.Matches[6].Ganador" />
+
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[6].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[6].Scores.Count(); i++)
+                                {
+                                    string identidad = (6 * 10000 + 100 + i).ToString().Trim();
+                                    if (!Model.Matches[6].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[6].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[6].Scores[i].NumeroSet" value="@Model.Matches[6].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[6].Scores[i].PartidoId" value="@Model.Matches[6].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[6].Scores[i].ScoreId" value="@Model.Matches[6].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[6].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[6].Scores[i].Score1" value="@Model.Matches[6].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[6].Scores.Count(); i++)
+                                {
+                                    string identidad = (6 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[6].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[6].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[1].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[6].Scores[i].Score2" value="@Model.Matches[6].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>@Model.Matches[6].Perfil.NombreTorneo.ToUpper()</h2>
+                </div>
+                <br />
+                <div style="text-align:center; border:solid; width:auto">
+                    <h2>@Model.Matches[2].Perfil1.NombreTorneo.ToUpper()</h2>
+                    <input type="hidden" asp-for="@Model.Matches[2].PartidoId" value="@Model.Matches[2].PartidoId" />
+                    <input type="hidden" asp-for="@Model.Matches[2].Jugador1Id" value="@Model.Matches[2].Jugador1Id" />
+                    <input type="hidden" asp-for="@Model.Matches[2].Jugador2Id" value="@Model.Matches[2].Jugador2Id" />
+                    <input type="hidden" asp-for="@Model.Matches[2].EtapaId" value="@Model.Matches[2].EtapaId" />
+                    <input type="hidden" asp-for="@Model.Matches[2].Ronda" value="@Model.Matches[2].Ronda" />
+                    <input type="hidden" asp-for="@Model.Matches[2].TorneoID" value="@Model.Matches[2].TorneoID" />
+                    <input type="hidden" asp-for="@Model.Matches[2].ZonaId" value="@Model.Matches[2].ZonaId" />
+                    <input type="hidden" asp-for="@Model.Matches[2].PartidoNumero" value="@Model.Matches[2].PartidoNumero" />
+                    <input type="hidden" asp-for="@Model.Matches[2].Cerrado" value="@Model.Matches[2].Cerrado" />
+                    <input type="hidden" asp-for="@Model.Matches[2].Ganador" value="@Model.Matches[2].Ganador" />
+
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[2].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[2].Scores.Count(); i++)
+                                {
+                                    string identidad = (2 * 10000 + 100 + i).ToString().Trim();
+                                    if (!Model.Matches[2].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[2].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[2].Scores[i].NumeroSet" value="@Model.Matches[2].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[2].Scores[i].PartidoId" value="@Model.Matches[2].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[2].Scores[i].ScoreId" value="@Model.Matches[2].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[2].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[2].Scores[i].Score1" value="@Model.Matches[2].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[2].Scores.Count(); i++)
+                                {
+                                    string identidad = (2 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[2].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[2].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[2].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[2].Scores[i].Score2" value="@Model.Matches[2].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>@Model.Matches[2].Perfil.NombreTorneo.ToUpper()</h2>
+
+                </div>
+            </div>
+            <div class="col-md-6" style="text-align:center;  width:auto; margin: 12% 50% 0 0">
+                <div style="text-align:center; border:solid; width:auto">
+                    @if (Model.Matches[8].Perfil1 != null)
+                    {
+                        <h2>@Model.Matches[8].Perfil1.NombreTorneo.ToUpper() </h2>
+                        <input type="hidden" asp-for="@Model.Matches[8].PartidoId" value="@Model.Matches[8].PartidoId" />
+                        <input type="hidden" asp-for="@Model.Matches[8].Jugador1Id" value="@Model.Matches[8].Jugador1Id" />
+                        <input type="hidden" asp-for="@Model.Matches[8].Jugador2Id" value="@Model.Matches[8].Jugador2Id" />
+                        <input type="hidden" asp-for="@Model.Matches[8].EtapaId" value="@Model.Matches[8].EtapaId" />
+                        <input type="hidden" asp-for="@Model.Matches[8].Ronda" value="@Model.Matches[8].Ronda" />
+                        <input type="hidden" asp-for="@Model.Matches[8].TorneoID" value="@Model.Matches[8].TorneoID" />
+                        <input type="hidden" asp-for="@Model.Matches[8].ZonaId" value="@Model.Matches[1].ZonaId" />
+                        <input type="hidden" asp-for="@Model.Matches[8].PartidoNumero" value="@Model.Matches[8].PartidoNumero" />
+                        <input type="hidden" asp-for="@Model.Matches[8].Cerrado" value="@Model.Matches[8].Cerrado" />
+                        <input type="hidden" asp-for="@Model.Matches[8].Ganador" value="@Model.Matches[8].Ganador" />
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[8].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[8].Scores.Count(); i++)
+                                {
+                                    string identidad = (8 * 10000 + 100 + i).ToString().Trim();
+
+                                    if (!Model.Matches[8].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[8].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[8].Scores[i].NumeroSet" value="@Model.Matches[8].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[8].Scores[i].PartidoId" value="@Model.Matches[8].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[8].Scores[i].ScoreId" value="@Model.Matches[8].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[8].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[8].Scores[i].Score1" value="@Model.Matches[8].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[8].Scores.Count(); i++)
+                                {
+                                    string identidad = (8 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[8].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[8].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[8].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[8].Scores[i].Score2" value="@Model.Matches[8].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    @if (Model.Matches[8].Perfil != null)
+                    {
+                        <h2>@Model.Matches[8].Perfil.NombreTorneo.ToUpper() </h2>
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+                </div>
+                <br />
+                <div style="text-align:center; border:solid; width:auto">
+                    @if (Model.Matches[11].Perfil1 != null)
+                    {
+                        <h2>@Model.Matches[11].Perfil1.NombreTorneo.ToUpper() </h2>
+                        <input type="hidden" asp-for="@Model.Matches[11].PartidoId" value="@Model.Matches[11].PartidoId" />
+                        <input type="hidden" asp-for="@Model.Matches[11].Jugador1Id" value="@Model.Matches[11].Jugador1Id" />
+                        <input type="hidden" asp-for="@Model.Matches[11].Jugador2Id" value="@Model.Matches[11].Jugador2Id" />
+                        <input type="hidden" asp-for="@Model.Matches[11].EtapaId" value="@Model.Matches[11].EtapaId" />
+                        <input type="hidden" asp-for="@Model.Matches[11].Ronda" value="@Model.Matches[11].Ronda" />
+                        <input type="hidden" asp-for="@Model.Matches[11].TorneoID" value="@Model.Matches[11].TorneoID" />
+                        <input type="hidden" asp-for="@Model.Matches[11].ZonaId" value="@Model.Matches[11].ZonaId" />
+                        <input type="hidden" asp-for="@Model.Matches[11].PartidoNumero" value="@Model.Matches[11].PartidoNumero" />
+                        <input type="hidden" asp-for="@Model.Matches[11].Cerrado" value="@Model.Matches[11].Cerrado" />
+                        <input type="hidden" asp-for="@Model.Matches[11].Ganador" value="@Model.Matches[11].Ganador" />
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[11].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[11].Scores.Count(); i++)
+                                {
+                                    string identidad = (11 * 10000 + 100 + i).ToString().Trim();
+
+                                    if (!Model.Matches[11].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[11].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[11].Scores[i].NumeroSet" value="@Model.Matches[11].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[11].Scores[i].PartidoId" value="@Model.Matches[11].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[11].Scores[i].ScoreId" value="@Model.Matches[11].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[11].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[11].Scores[i].Score1" value="@Model.Matches[11].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[11].Scores.Count(); i++)
+                                {
+                                    string identidad = (11 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[11].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[11].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[11].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[11].Scores[i].Score2" value="@Model.Matches[11].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                    @if (Model.Matches[11].Perfil != null)
+                    {
+                        <h2>@Model.Matches[11].Perfil.NombreTorneo.ToUpper() </h2>
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+
+
+                </div>
+            </div>
+            <div class="col-md-6" style="text-align:center;  width:auto">
+                <div style="text-align:center; border:solid; width:auto; margin:12% 12% 0 0">
+                    <h1>Semi Final 1</h1>
+
+                    @if (Model.Matches[12].Perfil1 != null)
+                    {
+                        <h2>@Model.Matches[12].Perfil1.NombreTorneo.ToUpper() </h2>
+                        <input type="hidden" asp-for="@Model.Matches[12].PartidoId" value="@Model.Matches[12].PartidoId" />
+                        <input type="hidden" asp-for="@Model.Matches[12].Jugador1Id" value="@Model.Matches[12].Jugador1Id" />
+                        <input type="hidden" asp-for="@Model.Matches[12].Jugador2Id" value="@Model.Matches[12].Jugador2Id" />
+                        <input type="hidden" asp-for="@Model.Matches[12].EtapaId" value="@Model.Matches[12].EtapaId" />
+                        <input type="hidden" asp-for="@Model.Matches[12].Ronda" value="@Model.Matches[12].Ronda" />
+                        <input type="hidden" asp-for="@Model.Matches[12].TorneoID" value="@Model.Matches[12].TorneoID" />
+                        <input type="hidden" asp-for="@Model.Matches[12].ZonaId" value="@Model.Matches[1].ZonaId" />
+                        <input type="hidden" asp-for="@Model.Matches[12].PartidoNumero" value="@Model.Matches[12].PartidoNumero" />
+                        <input type="hidden" asp-for="@Model.Matches[12].Cerrado" value="@Model.Matches[12].Cerrado" />
+                        <input type="hidden" asp-for="@Model.Matches[12].Ganador" value="@Model.Matches[12].Ganador" />
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[12].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[12].Scores.Count(); i++)
+                                {
+                                    string identidad = (8 * 10000 + 100 + i).ToString().Trim();
+
+                                    if (!Model.Matches[12].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[12].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[12].Scores[i].NumeroSet" value="@Model.Matches[12].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[12].Scores[i].PartidoId" value="@Model.Matches[12].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[12].Scores[i].ScoreId" value="@Model.Matches[12].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[12].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[12].Scores[i].Score1" value="@Model.Matches[12].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[12].Scores.Count(); i++)
+                                {
+                                    string identidad = (8 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[12].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[12].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[12].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[12].Scores[i].Score2" value="@Model.Matches[12].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    @if (Model.Matches[12].Perfil != null)
+                    {
+                        <h2>@Model.Matches[12].Perfil.NombreTorneo.ToUpper() </h2>
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+                </div>
+                <br />
+                <div style="text-align:center; border:solid; width:auto; margin:12% 0">
+                    <h1 style="text-align:center">FINAL</h1>
+
+                    @if (Model.Matches[14].Perfil1 != null)
+                    {
+                        <h2>@Model.Matches[14].Perfil1.NombreTorneo.ToUpper() </h2>
+                        <input type="hidden" asp-for="@Model.Matches[14].PartidoId" value="@Model.Matches[14].PartidoId" />
+                        <input type="hidden" asp-for="@Model.Matches[14].Jugador1Id" value="@Model.Matches[14].Jugador1Id" />
+                        <input type="hidden" asp-for="@Model.Matches[14].Jugador2Id" value="@Model.Matches[14].Jugador2Id" />
+                        <input type="hidden" asp-for="@Model.Matches[14].EtapaId" value="@Model.Matches[14].EtapaId" />
+                        <input type="hidden" asp-for="@Model.Matches[14].Ronda" value="@Model.Matches[14].Ronda" />
+                        <input type="hidden" asp-for="@Model.Matches[14].TorneoID" value="@Model.Matches[14].TorneoID" />
+                        <input type="hidden" asp-for="@Model.Matches[14].ZonaId" value="@Model.Matches[1].ZonaId" />
+                        <input type="hidden" asp-for="@Model.Matches[14].PartidoNumero" value="@Model.Matches[14].PartidoNumero" />
+                        <input type="hidden" asp-for="@Model.Matches[14].Cerrado" value="@Model.Matches[14].Cerrado" />
+                        <input type="hidden" asp-for="@Model.Matches[14].Ganador" value="@Model.Matches[14].Ganador" />
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[14].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[14].Scores.Count(); i++)
+                                {
+                                    string identidad = (8 * 10000 + 100 + i).ToString().Trim();
+
+                                    if (!Model.Matches[14].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[14].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[14].Scores[i].NumeroSet" value="@Model.Matches[14].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[14].Scores[i].PartidoId" value="@Model.Matches[14].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[14].Scores[i].ScoreId" value="@Model.Matches[14].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[14].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[14].Scores[i].Score1" value="@Model.Matches[14].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[14].Scores.Count(); i++)
+                                {
+                                    string identidad = (8 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[14].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[14].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[14].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[14].Scores[i].Score2" value="@Model.Matches[14].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    @if (Model.Matches[14].Perfil != null)
+                    {
+                        <h2>@Model.Matches[14].Perfil.NombreTorneo.ToUpper() </h2>
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+                </div>
+                <br />
+                <div style="text-align:center; border:solid; width:auto; margin: 12% 0 ">
+                    <h1>Semi Final 2</h1>
+                    @if (Model.Matches[13].Perfil1 != null)
+                    {
+                        <h2>@Model.Matches[13].Perfil1.NombreTorneo.ToUpper() </h2>
+                        <input type="hidden" asp-for="@Model.Matches[13].PartidoId" value="@Model.Matches[13].PartidoId" />
+                        <input type="hidden" asp-for="@Model.Matches[13].Jugador1Id" value="@Model.Matches[13].Jugador1Id" />
+                        <input type="hidden" asp-for="@Model.Matches[13].Jugador2Id" value="@Model.Matches[13].Jugador2Id" />
+                        <input type="hidden" asp-for="@Model.Matches[13].EtapaId" value="@Model.Matches[13].EtapaId" />
+                        <input type="hidden" asp-for="@Model.Matches[13].Ronda" value="@Model.Matches[13].Ronda" />
+                        <input type="hidden" asp-for="@Model.Matches[13].TorneoID" value="@Model.Matches[13].TorneoID" />
+                        <input type="hidden" asp-for="@Model.Matches[13].ZonaId" value="@Model.Matches[13].ZonaId" />
+                        <input type="hidden" asp-for="@Model.Matches[13].PartidoNumero" value="@Model.Matches[13].PartidoNumero" />
+                        <input type="hidden" asp-for="@Model.Matches[13].Cerrado" value="@Model.Matches[13].Cerrado" />
+                        <input type="hidden" asp-for="@Model.Matches[13].Ganador" value="@Model.Matches[13].Ganador" />
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[13].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[13].Scores.Count(); i++)
+                                {
+                                    string identidad = (11 * 10000 + 100 + i).ToString().Trim();
+
+                                    if (!Model.Matches[13].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[13].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[13].Scores[i].NumeroSet" value="@Model.Matches[13].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[13].Scores[i].PartidoId" value="@Model.Matches[13].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[13].Scores[i].ScoreId" value="@Model.Matches[13].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[13].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[13].Scores[i].Score1" value="@Model.Matches[13].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[13].Scores.Count(); i++)
+                                {
+                                    string identidad = (11 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[13].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[13].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[13].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[13].Scores[i].Score2" value="@Model.Matches[13].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                    @if (Model.Matches[13].Perfil != null)
+                    {
+                        <h2>@Model.Matches[13].Perfil.NombreTorneo.ToUpper() </h2>
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+
+
+                </div>
+            </div>
+            <div class="col-md-6" style="text-align:center;  width:auto; margin: 12% 12% 0 0">
+                <div style="text-align:center; border:solid; width:auto">
+                    @if (Model.Matches[9].Perfil1 != null)
+                    {
+                        <h2>@Model.Matches[9].Perfil1.NombreTorneo.ToUpper() </h2>
+                        <input type="hidden" asp-for="@Model.Matches[9].PartidoId" value="@Model.Matches[9].PartidoId" />
+                        <input type="hidden" asp-for="@Model.Matches[9].Jugador1Id" value="@Model.Matches[9].Jugador1Id" />
+                        <input type="hidden" asp-for="@Model.Matches[9].Jugador2Id" value="@Model.Matches[9].Jugador2Id" />
+                        <input type="hidden" asp-for="@Model.Matches[9].EtapaId" value="@Model.Matches[9].EtapaId" />
+                        <input type="hidden" asp-for="@Model.Matches[9].Ronda" value="@Model.Matches[9].Ronda" />
+                        <input type="hidden" asp-for="@Model.Matches[9].TorneoID" value="@Model.Matches[9].TorneoID" />
+                        <input type="hidden" asp-for="@Model.Matches[9].ZonaId" value="@Model.Matches[9].ZonaId" />
+                        <input type="hidden" asp-for="@Model.Matches[9].PartidoNumero" value="@Model.Matches[9].PartidoNumero" />
+                        <input type="hidden" asp-for="@Model.Matches[9].Cerrado" value="@Model.Matches[9].Cerrado" />
+                        <input type="hidden" asp-for="@Model.Matches[9].Ganador" value="@Model.Matches[9].Ganador" />
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[9].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[9].Scores.Count(); i++)
+                                {
+                                    string identidad = (9 * 10000 + 100 + i).ToString().Trim();
+                                    if (!Model.Matches[9].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[9].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[9].Scores[i].NumeroSet" value="@Model.Matches[9].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[9].Scores[i].PartidoId" value="@Model.Matches[9].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[9].Scores[i].ScoreId" value="@Model.Matches[9].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[9].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[9].Scores[i].Score1" value="@Model.Matches[9].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[9].Scores.Count(); i++)
+                                {
+                                    string identidad = (9 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[9].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[9].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[9].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[9].Scores[i].Score2" value="@Model.Matches[9].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    @if (Model.Matches[9].Perfil != null)
+                    {
+                        <h2>@Model.Matches[9].Perfil.NombreTorneo.ToUpper() </h2>
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+                </div>
+                <br />
+                <div style="text-align:center; border:solid; width:auto; margin: 50% 12% 0 0">
+                    @if (Model.Matches[10].Perfil1 != null)
+                    {
+                        <h2>@Model.Matches[10].Perfil1.NombreTorneo.ToUpper() </h2>
+                        <input type="hidden" asp-for="@Model.Matches[10].PartidoId" value="@Model.Matches[10].PartidoId" />
+                        <input type="hidden" asp-for="@Model.Matches[10].Jugador1Id" value="@Model.Matches[10].Jugador1Id" />
+                        <input type="hidden" asp-for="@Model.Matches[10].Jugador2Id" value="@Model.Matches[10].Jugador2Id" />
+                        <input type="hidden" asp-for="@Model.Matches[10].EtapaId" value="@Model.Matches[10].EtapaId" />
+                        <input type="hidden" asp-for="@Model.Matches[10].Ronda" value="@Model.Matches[10].Ronda" />
+                        <input type="hidden" asp-for="@Model.Matches[10].TorneoID" value="@Model.Matches[10].TorneoID" />
+                        <input type="hidden" asp-for="@Model.Matches[10].ZonaId" value="@Model.Matches[10].ZonaId" />
+                        <input type="hidden" asp-for="@Model.Matches[10].PartidoNumero" value="@Model.Matches[10].PartidoNumero" />
+                        <input type="hidden" asp-for="@Model.Matches[10].Cerrado" value="@Model.Matches[10].Cerrado" />
+                        <input type="hidden" asp-for="@Model.Matches[10].Ganador" value="@Model.Matches[10].Ganador" />
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[10].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[10].Scores.Count(); i++)
+                                {
+                                    string identidad = (10 * 10000 + 100 + i).ToString().Trim();
+                                    if (!Model.Matches[10].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[10].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[10].Scores[i].NumeroSet" value="@Model.Matches[10].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[10].Scores[i].PartidoId" value="@Model.Matches[10].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[10].Scores[i].ScoreId" value="@Model.Matches[10].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[10].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[10].Scores[i].Score1" value="@Model.Matches[10].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[10].Scores.Count(); i++)
+                                {
+                                    string identidad = (10 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[10].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[10].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[10].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[10].Scores[i].Score2" value="@Model.Matches[10].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                    @if (Model.Matches[10].Perfil != null)
+                    {
+                        <h2>@Model.Matches[10].Perfil.NombreTorneo.ToUpper() </h2>
+
+                    }
+                    else
+                    {
+                        <h2>----</h2>
+
+                    }
+
+
+                </div>
+            </div>
+            <div class="col-md-6" style="text-align:center;  width:auto; ">
+                <div style="text-align:center; border:solid; width:auto">
+                    <h2>@Model.Matches[1].Perfil1.NombreTorneo.ToUpper()</h2>
+                    <input type="hidden" asp-for="@Model.Matches[1].PartidoId" value="@Model.Matches[1].PartidoId" />
+                    <input type="hidden" asp-for="@Model.Matches[1].Jugador1Id" value="@Model.Matches[1].Jugador1Id" />
+                    <input type="hidden" asp-for="@Model.Matches[1].Jugador2Id" value="@Model.Matches[1].Jugador2Id" />
+                    <input type="hidden" asp-for="@Model.Matches[1].EtapaId" value="@Model.Matches[1].EtapaId" />
+                    <input type="hidden" asp-for="@Model.Matches[1].Ronda" value="@Model.Matches[1].Ronda" />
+                    <input type="hidden" asp-for="@Model.Matches[1].TorneoID" value="@Model.Matches[1].TorneoID" />
+                    <input type="hidden" asp-for="@Model.Matches[1].ZonaId" value="@Model.Matches[1].ZonaId" />
+                    <input type="hidden" asp-for="@Model.Matches[1].PartidoNumero" value="@Model.Matches[1].PartidoNumero" />
+                    <input type="hidden" asp-for="@Model.Matches[1].Cerrado" value="@Model.Matches[1].Cerrado" />
+                    <input type="hidden" asp-for="@Model.Matches[1].Ganador" value="@Model.Matches[1].Ganador" />
+
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[1].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[1].Scores.Count(); i++)
+                                {
+                                    string identidad = (1 * 10000 + 100 + i).ToString().Trim();
+                                    if (!Model.Matches[1].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[1].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[1].Scores[i].NumeroSet" value="@Model.Matches[1].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[1].Scores[i].PartidoId" value="@Model.Matches[1].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[1].Scores[i].ScoreId" value="@Model.Matches[1].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[1].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[1].Scores[i].Score1" value="@Model.Matches[1].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[1].Scores.Count(); i++)
+                                {
+                                    string identidad = (1 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[1].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[1].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[1].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[1].Scores[i].Score2" value="@Model.Matches[1].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>@Model.Matches[1].Perfil.NombreTorneo.ToUpper()</h2>
+
+                </div>
+                <br />
+                <div style="text-align:center; border:solid; width:auto">
+
+                    <h2>@Model.Matches[4].Perfil1.NombreTorneo.ToUpper()</h2>
+                    <input type="hidden" asp-for="@Model.Matches[4].PartidoId" value="@Model.Matches[4].PartidoId" />
+                    <input type="hidden" asp-for="@Model.Matches[4].Jugador1Id" value="@Model.Matches[4].Jugador1Id" />
+                    <input type="hidden" asp-for="@Model.Matches[4].Jugador2Id" value="@Model.Matches[4].Jugador2Id" />
+                    <input type="hidden" asp-for="@Model.Matches[4].EtapaId" value="@Model.Matches[4].EtapaId" />
+                    <input type="hidden" asp-for="@Model.Matches[4].Ronda" value="@Model.Matches[4].Ronda" />
+                    <input type="hidden" asp-for="@Model.Matches[4].TorneoID" value="@Model.Matches[4].TorneoID" />
+                    <input type="hidden" asp-for="@Model.Matches[4].ZonaId" value="@Model.Matches[4].ZonaId" />
+                    <input type="hidden" asp-for="@Model.Matches[4].PartidoNumero" value="@Model.Matches[4].PartidoNumero" />
+                    <input type="hidden" asp-for="@Model.Matches[4].Cerrado" value="@Model.Matches[4].Cerrado" />
+                    <input type="hidden" asp-for="@Model.Matches[4].Ganador" value="@Model.Matches[4].Ganador" />
+
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[4].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[4].Scores.Count(); i++)
+                                {
+                                    string identidad = (4 * 10000 + 100 + i).ToString().Trim();
+                                    if (!Model.Matches[4].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[4].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[4].Scores[i].NumeroSet" value="@Model.Matches[4].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[4].Scores[i].PartidoId" value="@Model.Matches[4].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[4].Scores[i].ScoreId" value="@Model.Matches[4].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[4].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[4].Scores[i].Score1" value="@Model.Matches[4].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[4].Scores.Count(); i++)
+                                {
+                                    string identidad = (4 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[4].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[4].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[4].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[4].Scores[i].Score2" value="@Model.Matches[4].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>@Model.Matches[4].Perfil.NombreTorneo.ToUpper()</h2>
+
+
+                </div>
+                <br />
+
+                <div style="text-align:center; border:solid; width:auto">
+                    <h2>@Model.Matches[5].Perfil1.NombreTorneo.ToUpper()</h2>
+                    <input type="hidden" asp-for="@Model.Matches[5].PartidoId" value="@Model.Matches[5].PartidoId" />
+                    <input type="hidden" asp-for="@Model.Matches[5].Jugador1Id" value="@Model.Matches[5].Jugador1Id" />
+                    <input type="hidden" asp-for="@Model.Matches[5].Jugador2Id" value="@Model.Matches[5].Jugador2Id" />
+                    <input type="hidden" asp-for="@Model.Matches[5].EtapaId" value="@Model.Matches[5].EtapaId" />
+                    <input type="hidden" asp-for="@Model.Matches[5].Ronda" value="@Model.Matches[5].Ronda" />
+                    <input type="hidden" asp-for="@Model.Matches[5].TorneoID" value="@Model.Matches[5].TorneoID" />
+                    <input type="hidden" asp-for="@Model.Matches[5].ZonaId" value="@Model.Matches[5].ZonaId" />
+                    <input type="hidden" asp-for="@Model.Matches[5].PartidoNumero" value="@Model.Matches[5].PartidoNumero" />
+                    <input type="hidden" asp-for="@Model.Matches[5].Cerrado" value="@Model.Matches[5].Cerrado" />
+                    <input type="hidden" asp-for="@Model.Matches[5].Ganador" value="@Model.Matches[5].Ganador" />
+
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[5].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[5].Scores.Count(); i++)
+                                {
+                                    string identidad = (5 * 10000 + 100 + i).ToString().Trim();
+                                    if (!Model.Matches[5].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[5].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[5].Scores[i].NumeroSet" value="@Model.Matches[5].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[5].Scores[i].PartidoId" value="@Model.Matches[5].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[5].Scores[i].ScoreId" value="@Model.Matches[5].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[5].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[5].Scores[i].Score1" value="@Model.Matches[5].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[5].Scores.Count(); i++)
+                                {
+                                    string identidad = (5 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[5].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[5].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[5].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[5].Scores[i].Score2" value="@Model.Matches[5].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>@Model.Matches[5].Perfil.NombreTorneo.ToUpper()</h2>
+                </div>
+                <br />
+                <div style="text-align:center; border:solid; width:auto">
+                    <h2>@Model.Matches[3].Perfil1.NombreTorneo.ToUpper()</h2>
+                    <input type="hidden" asp-for="@Model.Matches[3].PartidoId" value="@Model.Matches[3].PartidoId" />
+                    <input type="hidden" asp-for="@Model.Matches[3].Jugador1Id" value="@Model.Matches[3].Jugador1Id" />
+                    <input type="hidden" asp-for="@Model.Matches[3].Jugador2Id" value="@Model.Matches[3].Jugador2Id" />
+                    <input type="hidden" asp-for="@Model.Matches[3].EtapaId" value="@Model.Matches[3].EtapaId" />
+                    <input type="hidden" asp-for="@Model.Matches[3].Ronda" value="@Model.Matches[3].Ronda" />
+                    <input type="hidden" asp-for="@Model.Matches[3].TorneoID" value="@Model.Matches[3].TorneoID" />
+                    <input type="hidden" asp-for="@Model.Matches[3].ZonaId" value="@Model.Matches[3].ZonaId" />
+                    <input type="hidden" asp-for="@Model.Matches[3].PartidoNumero" value="@Model.Matches[3].PartidoNumero" />
+                    <input type="hidden" asp-for="@Model.Matches[3].Cerrado" value="@Model.Matches[3].Cerrado" />
+                    <input type="hidden" asp-for="@Model.Matches[3].Ganador" value="@Model.Matches[3].Ganador" />
+
+                    <table style="margin:auto">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[3].Scores.Count(); i++)
+                                {
+                                    <th style="width:@ancho; text-align:center">
+                                        @(i + 1)
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[3].Scores.Count(); i++)
+                                {
+                                    string identidad = (3 * 10000 + 100 + i).ToString().Trim();
+                                    if (!Model.Matches[3].Cerrado)
+                                    {
+
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[3].Scores[i].Score1" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+                                            <input type="hidden" asp-for="@Model.Matches[3].Scores[i].NumeroSet" value="@Model.Matches[3].Scores[i].NumeroSet" />
+                                            <input type="hidden" asp-for="@Model.Matches[3].Scores[i].PartidoId" value="@Model.Matches[3].Scores[i].PartidoId" />
+                                            <input type="hidden" asp-for="@Model.Matches[3].Scores[i].ScoreId" value="@Model.Matches[3].Scores[i].ScoreId" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[3].Scores[i].Score1
+                                <input type="hidden" asp-for="@Model.Matches[3].Scores[i].Score1" value="@Model.Matches[3].Scores[i].Score1" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                @for (int i = 0; i < Model.Matches[3].Scores.Count(); i++)
+                                {
+                                    string identidad = (3 * 10000 + 200 + i).ToString().Trim();
+                                    if (!Model.Matches[3].Cerrado)
+                                    {
+                                        <td style="width:@ancho; text-align:center">
+                                            <input type="number" id="@identidad" asp-for="@Model.Matches[3].Scores[i].Score2" min="0" max="@Model.SisTor.Puntos" style="border:2px solid; width:@ancho" class="font2" onchange="ControlScores(this,@Model.SisTor.Puntos)" />
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                            <td class="font2" style="width:@ancho; text-align:center; background-color:burlywood">
+                                @Model.Matches[3].Scores[i].Score2
+                                <input type="hidden" asp-for="@Model.Matches[3].Scores[i].Score2" value="@Model.Matches[3].Scores[i].Score2" />
+
+                            </td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>@Model.Matches[3].Perfil.NombreTorneo.ToUpper()</h2>
+
+                </div>
+            </div>
+        </div>
+        <button type="submit" id="actualizar" class="btn btn-primary font2">Actualizar Resultados</button>
+    </form>
+</div>
+
+<a class="font2" asp-controller="Torneo2" asp-action="Index">Volver a la Lista</a>
+

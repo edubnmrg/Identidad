@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Identidad.Models.Federacion>
+
+@{
+    ViewData["Title"] = "Federaciones";
+}
+    <div class="container-fluid" style="margin-left:3EM">
+        <h1>Federaciones</h1>
+
+        <p>
+            <a class="font2 " asp-action="Create">Agregar</a>
+        </p>
+        <table class="table table-stripped font2">
+            <thead class="table-dark">
+                <tr class=font2b>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.sigla)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.calle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.altura)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ciudad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.provinciaID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fedEmail)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FedUrl)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.telefono)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sigla)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.calle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.altura)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ciudad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Provincia.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fedEmail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FedUrl)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.telefono)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.FederacionID">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.FederacionID">Detalle</a> |
+                            <a asp-action="Delete" asp-route-id="@item.FederacionID">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>

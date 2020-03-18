@@ -1,0 +1,32 @@
+﻿@model Identidad.Models.Anotacion
+
+@{
+    ViewData["Title"] = "Eliminar Inscripcion";
+}
+
+    <h1>Eliminar Inscripcion</h1>
+
+<h3>Esta seguro de eliminar esta inscripcion?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Perfil.NombreCompleto)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Perfil.NombreCompleto)
+        </dd class>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Torneo)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Torneo.NombreTorneo)
+        </dd class>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="AnotacionID" />
+        <input type="submit" value="Eliminar" class="btn btn-danger font2" /><br />
+        <a class="font2" asp-action="Index">Volver a la Lista</a>
+    </form>
+</div>

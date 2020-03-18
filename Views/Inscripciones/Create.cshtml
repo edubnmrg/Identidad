@@ -1,0 +1,38 @@
+﻿@model Identidad.Models.Inscripcion
+
+@{
+    ViewData["Title"] = "Crear Inscripcion";
+}
+
+    <h1>Crear Inscripcion</h1>
+
+<hr />
+<div class="row font2">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PerfilFK" class="control-label font2b"></label>
+                <select asp-for="PerfilFK" class="form-control" asp-items="ViewBag.PerfilFK">
+                    <option value="">Elija un Jugador...</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TorneoFK" class="control-label font2b"></label>
+                <select asp-for="TorneoFK" class="form-control" asp-items="ViewBag.TorneoFK">
+                    <option value="">Elija un Torneo...</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary font2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="font2 " asp-action="Index">Volver a la Lista</a>
+</div>
+

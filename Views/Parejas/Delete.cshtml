@@ -1,0 +1,34 @@
+﻿@model Identidad.Models.Pareja
+
+@{
+    ViewData["Title"] = "Eliminar Pareja";
+}
+
+    <h1>Eliminar Pareja</h1>
+
+<h3>Esta seguro de eliminar esta pareja?</h3>
+<div>
+    <h4>Pareja</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Jugador1)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Perfil1.NombreCompleto)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Jugador2)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Perfil2.NombreCompleto)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ParejaID" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <hr />
+        <a class="font2 " asp-action="Index">Volver a la Lista</a>
+    </form>
+</div>

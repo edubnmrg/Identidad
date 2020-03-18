@@ -1,0 +1,50 @@
+﻿@model List<Identidad.Models.Torneo2>
+
+@{
+    ViewData["Title"] = "Zonas";
+}
+
+    <div style="margin-left:3EM">
+        <h1>Zonas</h1>
+        <br />
+
+
+        @*<p>
+            <a asp-action="Create">Create New</a>
+        </p>*@
+        @foreach (Torneo2 Torneo in Model)
+        {
+            <h2 class="table-dark">
+                @Torneo.NombreTorneo
+            </h2>
+            <form>
+                <div class="row">
+                    @foreach (Zone item in Torneo.Zones)
+                    {
+                        //<a class="btn btn-primary font2" asp-action="Edit" asp-route-id="@item.ZonaID">
+                        <button type="submit" style="width:33%" asp-controller="Zones" asp-action="Edit" asp-route-id="@item.ZonaID">
+                            <div id="z + @item.Numero.ToString()" style="width:33%; text-align:center">
+                                <h3>
+                                    Zona  @item.Numero
+                                </h3>
+                                @foreach (ZonaJugador jug in item.ZonaJugadores)
+                                {
+                                    <table class="table-striped">
+                                        <tr>
+                                            <td class="font2">
+                                                @jug.Perfil.NombreCompleto
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                }
+                            </div>
+                        </button>
+                        //</a>
+                    }
+                </div>
+            </form>
+        }
+
+
+    </div>

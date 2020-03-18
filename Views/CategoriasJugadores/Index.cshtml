@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Identidad.Models.CategoriaJugador>
+
+@{
+    ViewData["Title"] = "Agregar Categoria";
+}
+
+    
+    <div class="container-fluid" style="margin-left:3EM">
+        <h1>Agregar Categoria</h1>
+        <p>
+            <a class="font2 " asp-action="Create">Agregar</a>
+        </p>
+        <table class="table table-stripped">
+            <thead class="table-dark">
+                <tr class=font2b>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Perfil.apellido)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Perfil.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Juego)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Categoria)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="font2">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Perfil.apellido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Perfil.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Juego.nombreJuego)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Categoria.categoria)
+                        </td>
+                        <td>
+                            <a class="font2" asp-action="Edit" asp-route-id="@item.CategoriaJugadorID">Editar</a> |
+                            <a class="font2" asp-action="Delete" asp-route-id="@item.CategoriaJugadorID">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

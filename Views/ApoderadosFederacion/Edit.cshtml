@@ -1,0 +1,36 @@
+﻿@model Identidad.Models.ApoderadoFederacion
+
+@{
+    ViewData["Title"] = "Editar Apoderado Federacion";
+}
+    <div class="container-fluid" style="margin-left:2EM">
+
+        <h1>Editar Apoderado Federacion</h1>
+
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ApoFedID" />
+                    <div class="form-group">
+                        <label asp-for="FedID" class="control-label font2b"></label>
+                        <input asp-for="FedID" class="form-control font2" />
+                        <span asp-validation-for="FedID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PerfilID" class="control-label font2b"></label>
+                        <select asp-for="PerfilID" class="form-control font2" asp-items="ViewBag.PerfilID"></select>
+                        <span asp-validation-for="PerfilID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar" class="btn btn-primary font2" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a class="font2" asp-action="Index">Volver a la Lista</a>
+        </div>
+
+</div>

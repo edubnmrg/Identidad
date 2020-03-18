@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Identidad.Models.Recursos.Juego>
+
+@{
+    ViewData["Title"] = "Juegos";
+}
+
+<h1>Juegos</h1>
+
+<p>
+    <a class="font2 " asp-action="Create">Agregar</a>
+</p>
+<table class="table table-striped font2">
+    <thead class="thead-dark">
+        <tr class= font2b>
+            <th>Juego</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.nombreJuego
+            </td>      
+            <td>
+                
+                <a asp-action="Delete" asp-route-id="@item.nombreJuego">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

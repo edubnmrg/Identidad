@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Identidad.Models.PresidenteClub>
+
+@{
+    ViewData["Title"] = "Presidentes Club";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="container-fluid" style="margin-left:2EM">
+
+        <h1>Presidentes Club</h1>
+        @if (ViewBag.Autorizado == "PresidenteFederacion")
+        {
+            <p>
+                <a class="font2" asp-action="Create">Agregar</a>
+            </p>
+
+        }
+
+
+        <table class="table-striped font2">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Club)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Perfil.NombreCompleto)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Club.NombreClub)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Perfil.NombreCompleto)
+                        </td>
+                        <td>
+                            @if (ViewBag.Autorizado == "PresidenteClub")
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.PresClubID">Editar</a> ;
+                                <a asp-action="Delete" asp-route-id="@item.PresClubID">Eliminar</a>;
+                            }
+                            <a  asp-action="Details" asp-route-id="@item.PresClubID">Detalle</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

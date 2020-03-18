@@ -1,0 +1,34 @@
+﻿@model Identidad.Models.ApoderadoClub
+
+@{
+    ViewData["Title"] = "Eliminar Apoderado";
+}
+<div class="container-fluid" style="margin-left:2EM">
+
+    <h1>Eliminar Apoderado</h1>
+
+    <h3>Esta seguro de eliminar est Apoderado?</h3>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.Club)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.Club.NombreClub)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.Perfil)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.Perfil.NombreCompleto)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="ApoClubID" />
+            <input type="submit" value="Eliminar" class="btn btn-danger font2" /> 
+        </form>
+        <a class="font2" asp-action="Index">Volver a la Lista</a>
+
+    </div>
+</div>

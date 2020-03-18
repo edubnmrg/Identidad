@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Identidad.Models.Torneo2>
+
+@{
+    ViewData["Title"] = "Torneos";
+}
+
+<h1>Torneos</h1>
+
+<p>
+    <a class="font2" asp-action="Create">Agregar</a>
+</p>
+<table id="torneos" class="table table-striped font2">
+    <thead class="table-dark">
+        <tr class=font2b>
+            @*<th>
+                @Html.DisplayNameFor(model => model.NombreTorneo)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.ClubRefId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CatTorRefId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CanJugRefId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CatRefId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SisTorRefId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hasta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorInscripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notas)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.TorneoID" style="background-color:@item.Cat.Color" >
+                @*<td class="fitwidth">
+                    @Html.DisplayFor(modelItem => item.NombreTorneo)
+                </td>*@
+                <td class="fitwidth">
+                    @Html.DisplayFor(modelItem => item.Club.SiglaClub)
+                </td>
+                <td class="fitwidth">
+                    @Html.DisplayFor(modelItem => item.CatTor.catTorneo)
+                </td>
+                <td class="fitwidth">
+                    @Html.DisplayFor(modelItem => item.CanJug.cantJug)
+                </td>
+                <td class="fitwidth">
+                    @Html.DisplayFor(modelItem => item.Cat.categoria)
+                </td>
+                <td class="fitwidth">
+                    @Html.DisplayFor(modelItem => item.SisTor.sisTor)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Desde)*@
+                    @item.Desde.ToString("dd/MM/yy")
+                </td>
+                <td>
+                    @item.Hasta.ToString("dd/MM/yy")
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorInscripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notas)
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    @*<script>
+        function DetTorneo(tid)
+        {
+           $.ajax({
+              url: '@Url.Action("Details","Torneo2")',
+              data: {id : tid }
+           }).done(function() {
+              alert('Added'); 
+           });
+        }
+    </script>*@
+    <script>
+         $('#torneos tr').click(function () {
+        window.location.href = "Torneo2/Details/" + $(this).attr("id");
+    });
+    </script>
+ }

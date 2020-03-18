@@ -1,0 +1,80 @@
+﻿@model Identidad.Models.Torneo2
+
+@{
+    ViewData["Title"] = "AsignarZonas";
+}
+
+<h1>Asignar Zonas</h1>
+
+<div class="wrapper" style="width:100%">
+    <div id="listaJugadores"class="box" style="width:40%">
+        <div>
+            <table class="table-striped">
+                <thead class="table-dark font2b">
+                    <tr>
+                        <td>
+                            Inscriptos
+                        </td>
+
+                    </tr>
+                </thead>
+                <tboby>
+                    @foreach (var inscripto in Model.Anotaciones)
+                    {
+                        <tr class="font2">
+                            <td class="jugador" onclick="pasarJugador(event.target)">
+                                @inscripto.Perfil.NombreCompleto
+                            </td>
+                        </tr>
+                    }
+                </tboby>
+
+            </table>
+
+        </div>
+    </div>
+    <form asp-action="GuardarZonas" method="post">
+        <div id="listaZonas" class="box font2" style="width:60%">
+            @foreach (var zona in Model.Zones)
+            {
+                <div id="zona + @zona.Numero" class="zonas" style="width:50%; border-style:solid;border-width: 2px;">
+                    <label class="font2b"> Zona @zona.Numero </label>
+                    <table class="table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>
+                                    Nro
+                                </th>
+                                <th>
+                                    Jugador
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 1; i <= zona.CantidadJugadores; i++)
+                            {
+                                <tr class="jugzonarow">
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td class="jugzona">
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        <div>
+            <input type="submit" value="Guardar" class="btn btn-primary font2" />
+
+        </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la Lista</a>
+</div>
+

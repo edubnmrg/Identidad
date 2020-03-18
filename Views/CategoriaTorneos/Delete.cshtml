@@ -1,0 +1,30 @@
+﻿@model Identidad.Models.Recursos.CategoriaTorneo
+
+@{
+    ViewData["Title"] = "Eliminar Categoria Torneo";
+}
+<div class="container-fluid" style="margin-left:3EM">
+
+    <h1>Eliminar Categoria Torneo</h1>
+
+    <h3>Esta seguro de eliminar esta categoria?</h3>
+    <div class="font2">
+
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.catTorneo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.catTorneo)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="catTorneoID" />
+            <input type="submit" value="Eliminar" class="btn btn-danger font2" />
+        </form>
+        <a class="font2 " asp-action="Index">Volver a la Lista</a>
+
+    </div>
+    </div>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Identidad.Models.Inscripcion>
+
+@{
+    ViewData["Title"] = "Inscripciones";
+}
+
+    <h1>Inscripciones</h1>
+
+<p>
+    <a class="font2 " asp-action="Create">Agregar</a>
+</p>
+<table class="table table-stripped">
+    <thead class="table-dark">
+        <tr class= font2b>
+            <th>
+                @Html.DisplayNameFor(model => model.Perfil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Torneo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Perfil.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Torneo.NombreTorneo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.InscripcionID">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.InscripcionID">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

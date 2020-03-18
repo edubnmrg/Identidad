@@ -1,0 +1,40 @@
+﻿@model Identidad.Models.Pareja
+
+@{
+    ViewData["Title"] = "Agregar Pareja";
+}
+
+    <h1>Agregar Pareja</h1>
+
+<hr />
+<div class="row font2">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Jugador1" class="control-label font2b required-field"></label>
+                <select asp-for="Jugador1" class="form-control font2" asp-items="ViewBag.Jugador1">
+                    <option value="">Elija un Jugador...</option>
+
+                </select>
+                <span asp-validation-for="Jugador1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Jugador2" class="control-label font2b required-field"></label>
+                <select asp-for="Jugador2" class="form-control font2" asp-items="ViewBag.Jugador2">
+                    <option value="">Elija un Jugador...</option>
+
+                </select>
+                <span asp-validation-for="Jugador2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary font2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="font2 " asp-action="Index">Volver a la Lista</a>
+</div>
+

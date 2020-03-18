@@ -1,0 +1,43 @@
+﻿@model Identidad.Models.Galeria
+
+@{
+    ViewData["Title"] = "Eliminar Imagen";
+    var photoPath = "~/img/Galeria/" + (Model.FotoPath ?? "5q.png");
+
+}
+<div class="container-fluid" style="margin-left:3EM">
+
+    <h1>Eliminar Imagen</h1>
+
+    <h3>Esta seguro de eliminar esta imagen?</h3>
+    <div class="font2" style="margin-left:2EM">
+        <h4>Galeria</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.FotoPath)
+            </dt>
+            <dd class="col-sm-10 font2">
+                <img id="imagen" src="@photoPath" style="border:2px solid;max-height:100px" asp-append-version="true" />
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.Fecha)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.Fecha)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.Nota)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.Nota)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="GaleriaId" />
+            <input type="submit" value="Eliminar" class="btn btn-danger font2" /> <br />
+            <a class="font2" asp-action="Index">Volver a la Lista</a>
+        </form>
+    </div>
+    </div>

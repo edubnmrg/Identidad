@@ -1,0 +1,36 @@
+﻿@model Identidad.Models.ZonaJugador
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>ZonaJugador</h4>
+<hr />
+<div class="row font2">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ZonaJugadorID" />
+            <div class="form-group">
+                <label asp-for="ZonaID" class="control-label font2b"></label>
+                <input asp-for="ZonaID" class="form-control" />
+                <span asp-validation-for="ZonaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PerfilID" class="control-label font2b"></label>
+                <input asp-for="PerfilID" class="form-control" />
+                <span asp-validation-for="PerfilID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la Lista</a>
+</div>
+

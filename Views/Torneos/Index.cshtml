@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Identidad.Models.Torneo>
+
+@{
+    ViewData["Title"] = "Torneos";
+}
+
+<h1>Torneos</h1>
+
+<p>
+    <a class="font2" asp-action="Create">Agregar</a>
+</p>
+<table class="table table-striped font2">
+    <thead class="table-dark">
+        <tr class= font2b>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreTorneo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Club.NombreClub)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CatTorFK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CanJugFK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CatFK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SisTorFK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hasta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorInscripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notas)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr style="background-color:@item.Cat.Color">
+            <td class="fitwidth">
+                @Html.DisplayFor(modelItem => item.NombreTorneo)
+            </td>
+            <td class="fitwidth">
+                @Html.DisplayFor(modelItem => item.Club.NombreClub)
+            </td>
+            <td class="fitwidth">
+                @Html.DisplayFor(modelItem => item.CatTor.catTorneo)
+            </td>
+            <td class="fitwidth">
+                @Html.DisplayFor(modelItem => item.CanJug.cantJug)
+            </td>
+            <td class="fitwidth">
+                @Html.DisplayFor(modelItem => item.Cat.categoria)
+            </td>
+            <td class="fitwidth">
+                @Html.DisplayFor(modelItem => item.SisTor.sisTor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desde)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hasta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorInscripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notas)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TorneoID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.TorneoID">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.TorneoID">Eliminar</a>
+                <a asp-action="Inscribirme" asp-route-id="@item.TorneoID">Inscribirme</a>
+                <a asp-action="Inscriptos" asp-route-id="@item.TorneoID">Inscriptos</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

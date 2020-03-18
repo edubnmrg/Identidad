@@ -1,0 +1,73 @@
+﻿@model Federacion
+
+@{
+    ViewData["Title"] = "Agregar Federacion";
+}
+<a class="font2 " asp-action="Index">Volver a la Lista</a>
+
+<h1>Agregar Federacion</h1>
+
+<hr />
+<div class="row font2">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="nombre" class="control-label font2b"></label>
+                <input asp-for="nombre" class="form-control font2" />
+                <span asp-validation-for="nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sigla" class="control-label font2b"></label>
+                <input asp-for="sigla" class="form-control font2" />
+                <span asp-validation-for="sigla" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="calle" class="control-label font2b"></label>
+                <input asp-for="calle" class="form-control font2" />
+                <span asp-validation-for="calle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="altura" class="control-label font2b"></label>
+                <input asp-for="altura" class="form-control font2" />
+                <span asp-validation-for="altura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ciudad" class="control-label font2b"></label>
+                <input asp-for="ciudad" class="form-control font2" />
+                <span asp-validation-for="ciudad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="provinciaID" class="control-label font2b"></label>
+                <select asp-for="provinciaID" class="form-control font2" asp-items="ViewBag.provinciaID">
+                    <option value="">Elija una provincia...</option>
+                </select>
+                <span asp-validation-for="provinciaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fedEmail" class="control-label font2b"></label>
+                <input asp-for="fedEmail" class="form-control font2" />
+                <span asp-validation-for="fedEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FedUrl" class="control-label font2b"></label>
+                <input asp-for="FedUrl" class="form-control font2" />
+                <span asp-validation-for="FedUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefono" class="control-label font2b"></label>
+                <input asp-for="telefono" class="form-control font2" />
+                <span asp-validation-for="telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary font2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="font2 " asp-action="Index">Volver a la Lista</a>
+</div>
+
+</div>

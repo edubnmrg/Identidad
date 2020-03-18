@@ -1,0 +1,31 @@
+﻿@model Identidad.Models.PresidenteFederacion
+
+@{
+    ViewData["Title"] = "Detalle Presidente Federacion";
+}
+    <div class="container-fluid" style="margin-left:2EM">
+
+        <h1>Detalle Presidente Federacion</h1>
+
+        <div>
+            <dl class="row">
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.FedID)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Federacion.nombre)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Perfil.nombre)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Model.Perfil.NombreCompleto.ToUpper()
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a class="btn btn-primary font2" asp-action="Edit" asp-route-id="@Model.PresFedID">Editar</a>
+        </div>
+        <a class="font2" asp-action="Index">Volver a la Lista</a>
+        </div>
+

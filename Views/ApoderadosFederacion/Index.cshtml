@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Identidad.Models.ApoderadoFederacion>
+
+@{
+    ViewData["Title"] = "Apoderados Federacion";
+}
+<div class="container-fluid" style="margin-left:2EM">
+    <h1>Apoderados Federacion</h1>
+
+<p>
+    <a class="font2" asp-action="Agregar">Create New</a>
+</p>
+<table class="table-striped font2 ">
+    <thead class="table-dark">
+        <tr class="font2b">
+            <th>
+                Federacion
+            </th>
+            <th>
+                Apoderado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Federacion.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Perfil.NombreCompleto)
+                </td>
+                <td>
+                    <a class = "font2" asp-action="Edit" asp-route-id="@item.ApoFedID">Editar</a> 
+                    <a class = "font2" asp-action="Details" asp-route-id="@item.ApoFedID">Detalle</a> 
+                    <a class = "font2" asp-action="Delete" asp-route-id="@item.ApoFedID">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

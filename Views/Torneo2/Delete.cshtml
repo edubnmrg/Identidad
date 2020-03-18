@@ -1,0 +1,87 @@
+﻿@model Identidad.Models.Torneo2
+
+@{
+    ViewData["Title"] = "Eliminar Torneo";
+}
+
+<h1>Eliminar Torneo</h1>
+
+<h3>Esta seguro de eliminar este torneo?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.NombreTorneo)
+        </dt>
+        <dd class="col-sm-10 font2">
+            @Html.DisplayFor(model => model.NombreTorneo)
+        </dd>
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.ClubRefId)
+        </dt>
+        <dd class="col-sm-10 font2">
+            @Html.DisplayFor(model => model.Club.NombreClub)
+        </dd>
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.CatTorRefId)
+        </dt>
+        <dd class="col-sm-10 font2">
+            @Html.DisplayFor(model => model.CatTor.catTorneo)
+        </dd>
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.CanJugRefId)
+        </dt>
+        <dd class="col-sm-10 font2">
+            @Html.DisplayFor(model => model.CanJug.cantJug)
+        </dd>
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.CatRefId)
+        </dt>
+        <dd class="col-sm-10 font2">
+            @Html.DisplayFor(model => model.Cat.categoria)
+        </dd>
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.JuegoID)
+        </dt>
+        <dd class="col-sm-10 font2">
+            @Html.DisplayFor(model => model.JuegoID)
+        </dd>
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.SisTorRefId)
+        </dt>
+        <dd class="col-sm-10 font2">
+            @Html.DisplayFor(model => model.SisTor.sisTor)
+        </dd>
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Desde)
+        </dt>
+        <dd class="col-sm-12 font2">
+            @Html.DisplayFor(model => model.Desde)
+        </dd>
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Hasta)
+        </dt>
+        <dd class="col-sm-12 font2">
+            @Html.DisplayFor(model => model.Hasta)
+        </dd>
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.ValorInscripcion)
+        </dt>
+        <dd class="col-sm-10 font2">
+            @Html.DisplayFor(model => model.ValorInscripcion)
+        </dd>
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Notas)
+        </dt>
+        <dd class="col-sm-10 font2">
+            @Html.DisplayFor(model => model.Notas)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="TorneoID" />
+        <input type="submit" value="Eliminar" class="btn btn-danger font2" /><br />
+    </form>
+    <a class="font2" asp-action="Index">Volver a la Lista</a>
+
+</div>

@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Identidad.Models.Club>
+
+@{
+    ViewData["Title"] = "Clubes";
+}
+    <div class="container-fluid" style="margin-left:2EM">
+
+        <h1>Clubes</h1>
+
+        <p>
+            <a class="font2 " asp-action="Create">Agregar</a>
+        </p>
+        <table class="table table-stripped font2">
+            <thead class="table-dark">
+                <tr class=font2b>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NombreClub)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SiglaClub)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Calle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Altura)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ciudad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProvinciaID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClubEmail)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClubUrl)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FederacionID)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreClub)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SiglaClub)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Calle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Altura)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ciudad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Provincia.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClubEmail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClubUrl)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Federacion.nombre)
+                        </td>
+                        <td>
+                            @if (ViewBag.Autorizado == "ApoderadoClub")
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.ClubID">Editar</a> 
+                                <a asp-action="Delete" asp-route-id="@item.ClubID">Eliminar</a>
+
+                            }           
+                            <a asp-action="Details" asp-route-id="@item.ClubID">Detalle</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>

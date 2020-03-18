@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Email enviado";
+}
+
+<h1>EmailSent</h1>
+@if (ViewBag.ErrorTitle == null)
+{
+    <h3>
+        Ocurrio un error al procesar su requerimiento.
+        An error occured while processing your request.
+        The support team is notified and we are working on the fix
+        El equipo de desarrollo ha sido notificado y esta trabando para solucionarlo
+    </h3>
+    <h5>Contactenos en 5quillasJCR@@gmail.com</h5>
+}
+else
+{
+    <h1 class="text-danger">@ViewBag.ErrorTitle</h1>
+    <h6 class="text-danger">@ViewBag.ErrorMessage</h6>
+}

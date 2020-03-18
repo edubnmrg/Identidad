@@ -1,0 +1,259 @@
+﻿@model Identidad.Models.Torneo2
+
+@{
+    ViewData["Title"] = "Detalle Torneo";
+}
+<div class="container-fluid" style="margin-left:3EM">
+<h1>Detalle Torneo</h1>
+
+<div class="row">
+    <div class="col overflow-auto" style="width:50%">
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.NombreTorneo)
+
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.NombreTorneo)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.Club)
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.Club.NombreClub)
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.CatTorRefId)
+
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.CatTor.catTorneo)
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.CanJugRefId)
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.CanJug.cantJug)
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.CatRefId)
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.Cat.categoria)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.JuegoID)
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.JuegoID)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.SisTorRefId)
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.SisTor.sisTor)
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.Desde)
+
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.Desde)
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.Hasta)
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.Hasta)
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.ValorInscripcion)
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.ValorInscripcion)
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.Notas)
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.Notas)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.ZonasCerradas)
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.ZonasCerradas)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.CrucesCerrados)
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.CrucesCerrados)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col font2b">
+                @Html.DisplayNameFor(model => model.TorneoCerrado)
+            </div>
+            <div class="col font2">
+                @Html.DisplayFor(model => model.TorneoCerrado)
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table-striped">
+                <thead class="table-dark font2b">
+                    <tr>
+                        <th class="table-dark font2b">
+                            Inscriptos
+                        </th>
+                    </tr>
+                </thead>
+                <tboby>
+                    @for (int i = 0; i < (Model.Anotaciones.Count() / 2); i++)
+                    {
+                        <tr class="font2">
+                            <td class="table-dark" style="width:2EM; text-align:center">
+                                @(i * 2 + 1)
+                            </td>
+                            <td>
+                                @Model.Anotaciones[i * 2].Perfil.NombreTorneo.ToUpper()
+                            </td>
+                            <td class="table-dark" style="width:2EM; text-align:center">
+                                @(i * 2 + 2)
+                            </td>
+                            <td>
+                                @Model.Anotaciones[i * 2 + 1].Perfil.NombreTorneo.ToUpper()
+                            </td>
+                        </tr>
+
+                    }
+                    @for (int i = 0; i < (Model.Anotaciones.Count() % 2); i++)
+                    {
+                        <tr class="font2">
+                            <td class="table-dark" style="width:2EM">
+                                @(Model.Anotaciones.Count())
+                            </td>
+                            <td>
+                                @Model.Anotaciones[0].Perfil.NombreTorneo.ToUpper()
+                            </td>
+
+                        </tr>
+
+                    }
+                </tboby>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="row" style="max-height:200px">
+    @if (User.IsInRole("Administrador") || User.IsInRole("Dueño"))
+    {
+        <a class="btn btn-primary font2" asp-action="Edit" asp-route-id="@Model.TorneoID">Editar</a>
+        <a class="btn btn-primary font2" asp-action="Delete" asp-route-id="@Model.TorneoID">Eliminar</a>
+        
+
+    }
+
+
+
+
+
+    @if (!Model.InscripcionCerrada)
+    {
+
+        <a class="btn btn-primary font2" asp-action="Inscribirme" asp-route-id="@Model.TorneoID">Inscribirme</a>
+
+    }
+    <a class="btn btn-primary font2" asp-action="Inscriptos" asp-route-id="@Model.TorneoID">Inscriptos</a>
+    @{ int tId = @Model.TorneoID * 100 + 1;}
+    @if (User.IsInRole("Administrador") || User.IsInRole("Dueño"))
+    {
+
+        @if (Model.Zones.Count > 0)
+        {
+            <a class="btn btn-primary font2" asp-action="Administrar" asp-route-id="@tId">Administrar</a>
+
+            if (Model.ZonasCerradas)
+            {
+                <a class="btn btn-primary font2" asp-action="AdministrarCruces" asp-route-id="@tId">Cruces</a>
+
+            }
+
+            if (Model.CrucesCerrados)
+            {
+                <a class="btn btn-primary font2" asp-action="AdministrarEliminatoria" asp-route-id="@Model.TorneoID">Eliminacion</a>
+
+            }
+            @*<a class="btn btn-primary font2" asp-action="Administrar" asp-route-id="@tId">Zonas</a>
+                <a class="btn btn-primary font2" asp-action="AdministrarCruces" asp-route-id="@tId">Cruces</a>*@
+
+            if (!Model.TorneoCerrado)
+            {
+
+            }
+            @*<a class="btn btn-primary font2" asp-action="AdministrarEliminatoria" asp-route-id="@Model.TorneoID">Eliminacion</a>*@
+
+        }
+
+
+
+
+
+
+        @if (Model.Zones.Count == 0)
+        {
+            <a class="btn btn-primary font2" asp-action="AsignarZonas" asp-route-id="@Model.TorneoID">Asignar Zonas</a>
+            <a class="btn btn-primary font2" asp-action="ZonasAutomaticas" asp-route-id="@Model.TorneoID">Zonas Automaticas</a><br />
+
+        }
+        else
+        {
+            <a class="btn btn-primary font2" asp-controller="Zones" asp-action="Index" asp-route-id="@Model.TorneoID">Ver Zonas</a>
+            <a class="btn btn-primary font2" asp-controller="Clasificados" asp-action="ClasificadosTorneo" asp-route-id="@Model.TorneoID">Clasificados</a><br />
+
+        }
+
+    }
+    <a class="font2" asp-action="Index">Volver a la Lista</a>
+</div>
+</div>

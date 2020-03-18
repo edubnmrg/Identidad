@@ -1,0 +1,105 @@
+﻿@model Identidad.ViewModels.Rankings2VM
+
+@{
+    ViewData["Title"] = "Rankings";
+
+}
+
+    <div style="margin-left:3EM">
+        <h1>Rankings</h1>
+        <nav aria-label="...">
+            <ul class="pagination font2">
+                
+                @if (Model.CategoriaActiva > 0)
+                {
+                    <li class="page-item ">
+                        @{ int CatAnt = Model.CategoriaActiva-1;}
+                        @*<span aria-hidden="true">&laquo;</span>*@
+                        <a class="page-link" aria-label="Previous" asp-action="Index" asp-route-id="@CatAnt">
+                            &laquo;
+                        </a>
+                    </li>
+                }
+
+                @for (int i = 0; i<  Model.Categorias.Count(); i++)
+                {
+
+
+                    if (i == Model.CategoriaActiva)
+                    {
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">@Model.Categorias[i].categoria <span class="sr-only">(current)</span></a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" style="color: #007bff;height:100%" asp-action="Index" asp-route-id="@i">@Model.Categorias[i].categoria</a>
+                        </li>
+
+
+                    }
+
+                }
+                @if (Model.CategoriaActiva != Model.Categorias.Count()-1)
+                    {
+                        int CatSig = Model.CategoriaActiva+1;
+
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Next" asp-action="Index" asp-route-id="@CatSig">
+                            @*<span aria-hidden="true">&raquo;</span>*@
+                            &raquo;
+                        </a>
+                    </li>
+                }
+
+
+            </ul>
+        </nav>
+            <p>
+                <a class="font2" asp-action="Agregar">Agregar</a>
+            </p>
+            <table class="table table-striped font2">
+                <thead class="table-dark">
+                    <tr>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Categorias[0].categoria)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Rankings[0].JuegoID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Rankings[0].Puntos)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Rankings)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Perfil.NombreCompleto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Categoria.categoria)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Fecha)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Puntos)
+                            </td>
+                            <td>
+                                <a class="font2" asp-action="Edit" asp-route-id="@item.RankingID">Editar</a> |
+                                <a class="font2" asp-action="Delete" asp-route-id="@item.RankingID">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+           
+    </div>

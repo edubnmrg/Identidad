@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Identidad.Models.Zona>
+
+@{
+    ViewData["Title"] = "Zonas";
+}
+
+<h1>Zonas</h1>
+
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
+
+@foreach (Zona z in Model)
+{
+    <table >
+        <thead class="table-dark">
+            <tr>
+                "Zona" + @z.Numero
+            </tr>
+            <tr>
+                <td>
+                    Nro
+                </td>
+                <td>Jugador
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Zona zJ in Model)
+            {
+                <tr>
+                    <td>
+                    </td>
+                </tr>
+}
+
+        </tbody>
+   
+    </table>
+}
+
+<table class="table table-stripped">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Torneo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadJugadores)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Torneo.NombreTorneo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CantidadJugadores)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ZonaID">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.ZonaID">Detalle</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ZonaID">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

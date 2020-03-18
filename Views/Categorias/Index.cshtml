@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Identidad.Models.Recursos.Categoria>
+
+@{
+    ViewData["Title"] = "Categorias";
+}
+    <div class="container-fluid" style="margin-left:3EM">
+
+        <h1>Categorias</h1>
+
+        <p>
+            <a class="font2 " asp-action="Create">Agregar</a>
+        </p>
+        <table class="table table-striped font2">
+            <thead class="table-dark">
+                <tr class=font2b>
+                    <th>
+                        @Html.DisplayNameFor(model => model.categoria)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Color)
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.categoria)
+                        </td>
+                        <td style="background-color:@item.Color">
+                            @Html.DisplayFor(modelItem => item.Color)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.categoriaID">Editar</a> |
+
+                            <a asp-action="Delete" asp-route-id="@item.categoriaID">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>

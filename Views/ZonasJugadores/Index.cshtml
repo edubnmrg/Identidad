@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Identidad.Models.ZonaJugador>
+
+@{
+    ViewData["Title"] = "Zonas";
+}
+
+<h1>Zonas</h1>
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<table class="table table-stripped">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ZonaID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PerfilID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZonaID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PerfilID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ZonaJugadorID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.ZonaJugadorID">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.ZonaJugadorID">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

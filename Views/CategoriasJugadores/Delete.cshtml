@@ -1,0 +1,50 @@
+﻿@model Identidad.Models.CategoriaJugador
+
+@{
+    ViewData["Title"] = "Eliminar Categoria Jugador";
+}
+
+    <h1>Eliminar Categoria Jugador</h1> 
+
+<h3>Esta seguro de eliminar esta categoria?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Perfil.apellido)
+        </dt>
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Perfil.nombre)
+        </dt>
+        <dt class="col-sm-6 font2b">
+            @Html.DisplayNameFor(model => model.Juego.nombreJuego)
+        </dt>
+
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Categoria.categoria)
+        </dt>
+
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2 font2">
+            @Html.DisplayFor(model => model.Perfil.apellido)
+        </dt>
+        <dt class="col-sm-2 font2">
+            @Html.DisplayFor(model => model.Perfil.nombre)
+        </dt>
+        <dt class="col-sm-6 font2">
+            @Html.DisplayFor(model => model.Juego.nombreJuego)
+        </dt>
+
+        <dt class="col-sm-2 font2">
+            @Html.DisplayFor(model => model.Categoria.categoria)
+        </dt>
+
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CategoriaJugadorID" />
+        <input type="submit" value="Eliminar" class="btn btn-danger font2" /><br />
+    </form>
+    <a class="font2 " asp-action="Index">Volver a la Lista</a>
+
+</div>

@@ -1,0 +1,77 @@
+﻿@model Identidad.Models.Federacion
+
+@{
+    ViewData["Title"] = "Eliminar Federacion";
+}
+<div class="container-fluid" style="margin-left:3EM">
+
+    <h1>Eliminar Federacion</h1>
+
+    <h3>Esta seguro de eliminar esta Federacion?</h3>
+    <div class="font2">
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.sigla)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.sigla)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.calle)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.calle)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.altura)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.altura)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.ciudad)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ciudad)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.provinciaID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Provincia.nombre)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.fedEmail)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.fedEmail)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.FedUrl)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FedUrl)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.telefono)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.telefono)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="FederacionID" />
+            <input type="submit" value="Eliminar" class="btn btn-danger font2" /><br />
+        </form>
+        <a class="font2 " asp-action="Index">Volver a la Lista</a>
+
+    </div>
+</div>

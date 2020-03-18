@@ -1,0 +1,29 @@
+﻿@model Identidad.Models.Recursos.Provincia
+
+@{
+    ViewData["Title"] = "Agregar Provincia";
+}
+
+    <h1>Agregar Provincia</h1>
+
+<hr />
+<div class="row font2">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="nombre" class="control-label font2b">Nombre</label>
+                <input asp-for="nombre" class="form-control" />
+                <span asp-validation-for="nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary font2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="font2 " asp-action="Index">Volver a la Lista</a>
+</div>
+

@@ -1,0 +1,60 @@
+﻿@model Identidad.Models.Partido
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Partido</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Jugador1Id)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Jugador1Id)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Jugador2Id)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Jugador2Id)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.ZonaId)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.ZonaId)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Etapa)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Etapa.NombreEtapa)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.PartidoNumero)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.PartidoNumero)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Cerrado)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Cerrado)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Ganador)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Ganador)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.PartidoId">Edit</a> |
+    <a asp-action="Index">Volver a la Lista</a>
+</div>

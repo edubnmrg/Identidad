@@ -1,0 +1,66 @@
+﻿
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Iniciar sesión";
+}
+
+<div class="row font2b" style="margin-left:10px">
+    <div class="col-md-6">
+        <h1>Inicio de Sesión Local</h1>
+        <hr />
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="font2b requiered-field">Email</label>
+                <input asp-for="Email" class="form-control font2" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="font2b requiered-field">Contraseña</label>
+                <input asp-for="Password" class="form-control font2" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group font2">
+                <div class="checkbox">
+                    <label asp-for="RememberMe">
+                        Recordarme
+                        <input asp-for="RememberMe" />
+                        
+
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary font2">Iniciar sesión</button>
+            <div>
+                <a class="font2 " asp-action="ForgotPassword" >Olvide mi Contraseña</a>
+            </div>
+        </form>
+    </div>
+
+    @*<div class="col-md-6">
+        <h1>Inicio de sesión Externo</h1>
+        <hr />
+        @{
+            if (Model.ExternalLogins.Count == 0)
+            {
+                <div>No hay servidores externos configurados</div>
+            }
+            else
+            {
+                <form method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+                    <div>
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            <button type="submit" class="btn btn-primary font2" style="width:auto"
+                                    name="provider" value="@provider.Name"
+                                    title="Login usin your @provider.DisplayName account">
+                                @provider.DisplayName
+                            </button>
+                        }
+                    </div>
+                </form>
+            }
+        }
+    </div>*@
+</div>

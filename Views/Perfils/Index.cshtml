@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Identidad.Models.Perfil>
+
+@{
+    ViewData["Title"] = "Perfiles";
+}
+
+    <div class="container-fluid" style="margin-left:3EM">
+        <h1>Perfiles</h1>
+
+
+        <a class="font2" asp-action="Create">Agregar</a>
+
+        <table class="table table-striped font2">
+            <thead class="table-dark">
+                <tr class="font2b">
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.apellido)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tDocID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.numeroDocumento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.calle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.altura)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ciudad)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Provincia.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.telefono)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.celular)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.club)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.fotoPath)
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="font2">
+
+
+
+                @foreach (var item in Model)
+                {
+                    var photoPath = "~/img/fotosPerfiles/" + (item.fotoPath ?? "5q.png");
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.apellido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tipoDeDocumento.Abreviacion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.numeroDocumento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.calle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.altura)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ciudad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Provincia.nombre)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.celular)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.club.NombreClub)
+                        </td>
+                        @*<td>
+                            @if (item.foto != null)
+                            {
+                                <img id="perfilFoto" src="data:image;base64,@System.Convert.ToBase64String(item.foto)" style="border:2px solid;max-height:100px" />
+                            }
+                            else
+                            {
+                                <img id="perfilFoto" style="border:2px solid;max-height:100px" />
+                            }
+                        </td>*@
+                        <td>
+                            <img id="perfilFoto" src="@photoPath" style="border:2px solid;max-height:100px" asp-append-version="true" />
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.ID">Detalle</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

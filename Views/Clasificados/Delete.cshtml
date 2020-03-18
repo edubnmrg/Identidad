@@ -1,0 +1,45 @@
+﻿@model Identidad.Models.Clasificado
+
+@{
+    ViewData["Title"] = "Eliminar Clasificado";
+}
+
+
+    <div style="margin-left=2EM">
+        <h1>Eliminar Clasificado</h1>
+
+        <h3>Esta seguro de eliminar este clasificado?</h3>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.TorneoID)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.TorneoID)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.PerfilID)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.PerfilID)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.Puesto)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.Puesto)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.Promedio)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.Promedio)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="ClasificadoID" />
+            <input type="submit" value="Eliminar" class="btn btn-danger font2" /> <br />
+            <a class="font2" asp-action="Index">Volver a la Lista</a>
+        </form>
+    </div>

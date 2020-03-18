@@ -1,0 +1,26 @@
+﻿@model Identidad.Models.Recursos.Etapa
+
+@{
+    ViewData["Title"] = "Eliminar Etapa";
+}
+
+<h1>Eliminar Etapa</h1>
+
+<h3>Esta seguro de eliminar esta etapa?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.NombreEtapa)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.NombreEtapa)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="EtapaId" />
+        <input type="submit" value="Delete" class="btn btn-danger font2" /> <br />
+        <a class="font2" asp-action="Index">Volver a la Lista</a>
+    </form>
+</div>

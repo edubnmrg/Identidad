@@ -1,0 +1,33 @@
+﻿@model Identidad.Models.Recursos.Ciudad
+
+@{
+    ViewData["Title"] = "Eliminar Ciudad";
+}
+
+<h1>Eliminar Ciudad</h1>
+
+<h3>Esta seguro de eliminar esta ciudad?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+        <dd class="col-sm-10 font2">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+        <dt class="col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.ProvinciaID)
+        </dt>
+        <dd class="col-sm-10 font2">
+            @Html.DisplayFor(model => model.Provincia.nombre)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CiudadID" />
+        <input type="submit" value="Eliminar" class="btn btn-danger font2" /><br />
+    </form>
+    <a class="font2 " asp-action="Index">Volver a la Lista</a>
+
+</div>

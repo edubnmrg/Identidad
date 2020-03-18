@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Identidad.Models.Partido>
+
+@{
+    ViewData["Title"] = "Partidos";
+}
+
+    <div style="margin-left=2EM">
+        <h1>Partidos</h1>
+
+        <p>
+            <a class="font2" asp-action="Create">Agregar</a>
+        </p>
+    </div>
+
+<table class="table table-striped">
+    <thead class="table-dark font2" >
+        <tr>
+            <th>
+                Jugador 1
+            </th>
+            <th>
+                Jugador 2
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ZonaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Etapa)
+            </th>
+            <th>
+                Nro
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cerrado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ganador)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="font2">
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Perfil1.NombreTorneo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Perfil.NombreTorneo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZonaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Etapa.NombreEtapa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartidoNumero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cerrado)
+            </td>
+            <td>
+                @if (item.Cerrado)
+                {
+                    if (item.Ganador == item.Jugador1Id)
+                    {
+                        Html.DisplayFor(modelItem => item.Perfil1.NombreTorneo);
+
+                    }
+                    else
+                    {
+                        Html.DisplayFor(modelItem => item.Perfil.NombreTorneo);
+
+                    }
+
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PartidoId">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.PartidoId">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,22 @@
+﻿@model Identidad.Models.Recursos.Juego
+
+@{
+    ViewData["Title"] = "Detalle Juego";
+}
+    <div class="container-fluid" style="margin-left:3EM">
+
+        <h1>Detalle de Juego</h1>
+
+        <div>
+
+            <hr />
+            <dl class="row">
+                @Model.nombreJuego
+            </dl>
+        </div>
+        <div>
+            <a class="font2 " asp-action="Edit" asp-route-id="@Model.nombreJuego">Editar</a>
+        </div>        
+        <a class="font2 " asp-action="Index">Volver a la Lista</a>
+
+    </div>

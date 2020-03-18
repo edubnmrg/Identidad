@@ -1,0 +1,71 @@
+﻿@model IEnumerable<IdentityRole>
+
+@using Microsoft.AspNetCore.Authorization
+
+@inject IAuthorizationService authorizationService
+
+@{
+    ViewBag.Title = "All Roles";
+}
+<div class="container-fluid fondo" >
+
+    <h1>Todos los Roles</h1>
+    <div>
+        <a class="font2" style="width:auto" asp-action="CreateRole"
+           asp-controller="administration">Agregar rol</a>
+        <table class="table-striped">
+            <thead class="table-dark font2">
+                <tr>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td class="font2" style="width:auto">
+                            @Html.DisplayFor(modelItem => role.Name)
+                        </td>
+                        <td>
+
+                            <a class="font2" asp-action="EditRole"
+                               asp-controller="Administration" asp-route-id="@role.Id">
+                                Editar
+                            </a>|
+                            <a class="font2" asp-controller="Administration"
+                               asp-action="DeleteRole" asp-route-id="@role.Id">Eliminar</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    @*<a class="btn btn-primary" asp-action="EditRole"
+           asp-controller="Administration" asp-route-id="@/*role.Id*/">
+            Editar
+        </a>
+
+        <span id="confirmDeleteSpan_@/*role.Id*/" style="display:none">
+            <span>Esta seguro de eliminar el rol?</span>
+            <button type="submit" class="btn btn-danger">Yes</button>
+            <a href="#" class="btn btn-primary"
+               onclick="confirmDelete('@/*role.Id*/', false)">No</a>
+        </span>
+
+        <span id="deleteSpan_@/*role.Id*/">
+            <a href="#" class="btn btn-danger"
+               onclick="confirmDelete('@/*role.Id*/', true)">Eliminar</a>
+        </span>
+        <a class="btn btn-primary" asp-action="EditUsersInRole"
+           asp-controller="Administration" asp-route-roleId="@/*role.Id*/">
+            Usuarios
+        </a>*@
+
+
+
+    @section Scripts {
+        <script src="~/js/CustomScript.js"></script>
+    }

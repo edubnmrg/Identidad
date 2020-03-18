@@ -1,0 +1,101 @@
+﻿@model Identidad.Models.Torneo
+
+@{
+    ViewData["Title"] = "Editar Torneo";
+}
+
+<h1>Editar Torneo</h1>
+
+<hr />
+<div class="row font2">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TorneoID" />
+            <div class="form-group">
+                <label asp-for="NombreTorneo" class="control-label font2b"></label>
+                <input asp-for="NombreTorneo" class="form-control font2" />
+                <span asp-validation-for="NombreTorneo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClubFK" class="control-label font2b"></label>
+                <select asp-for="ClubFK" class="form-control font2" asp-items="ViewBag.ClubFK">
+                    <option value="@Model.ClubFK"></option>
+
+                </select>
+                <span asp-validation-for="ClubFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatTorFK" class="control-label font2b"></label>
+                <select asp-for="CatTorFK" class="form-control font2" asp-items="ViewBag.CatTorFK">
+                    <option value="@Model.CatTorFK"></option>
+
+                </select>
+                <span asp-validation-for="CatTorFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CanJugFK" class="control-label font2b"></label>
+                <select asp-for="CanJugFK" class="form-control font2" asp-items="ViewBag.CanJugFK">
+                    <option value="@Model.CanJugFK"></option>
+
+                </select>
+
+                <span asp-validation-for="CanJugFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatFK" class="control-label font2b"></label>
+                <select asp-for="CatFK" class="form-control font2" asp-items="ViewBag.CatFK">
+                    <option value="@Model.CatFK"></option>
+
+                </select>
+
+                <span asp-validation-for="CatFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SisTorFK" class="control-label font2b"></label>
+                <select asp-for="SisTorFK" class="form-control font2" asp-items="ViewBag.SisTorFK">
+                    <option value="@Model.SisTorFK"></option>
+
+                </select>
+                <span asp-validation-for="SisTorFK" class="text-danger"></span>
+            </div>
+            <div class="form-group"data-provide="datepicker">
+                <label asp-for="Desde" class="control-label font2b"></label>
+                <input asp-for="Desde" class="form-control font2" />
+                <span asp-validation-for="Desde" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="Hasta" class="control-label font2b"></label>
+                <input asp-for="Hasta" class="form-control font2" />
+                <span asp-validation-for="Hasta" class="text-danger"></span>
+            </div>*@
+        <div class="input-group date" data-provide="datepicker">
+            <label asp-for="Hasta" class="control-label font2b"></label>
+            <input asp-for="Hasta" class="form-control font2 datepicker" data-date-format="dd/MM/yy">
+            <span asp-validation-for="Hasta" class="text-danger"></span>
+
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+            </div>
+        </div>
+            <div class="form-group">
+                <label asp-for="ValorInscripcion" class="control-label font2b"></label>
+                <input asp-for="ValorInscripcion" class="form-control font2" />
+                <span asp-validation-for="ValorInscripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notas" class="control-label font2b"></label>
+                <input size=512 asp-for="Notas" class="form-control font2" />
+                <span asp-validation-for="Notas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary font2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="font2" asp-action="Index">Volver a la Lista</a>
+</div>
+

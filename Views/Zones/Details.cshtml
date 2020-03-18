@@ -1,0 +1,36 @@
+﻿@model Identidad.Models.Zone
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Zone</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Torneo)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Torneo.NombreTorneo)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.CantidadJugadores)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.CantidadJugadores)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ZonaID">Edit</a> |
+    <a asp-action="Index">Volver a la Lista</a>
+</div>

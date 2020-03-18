@@ -1,0 +1,64 @@
+﻿@model Identidad.Models.Partido
+
+@{
+    ViewData["Title"] = "Eliminar Partido";
+}
+
+
+    <div style="margin-left:2EM">
+        <h1>Eliminar Partido</h1>
+
+        <h3>Esta seguro de eliminar este partido?</h3>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.Jugador1Id)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.Jugador1Id)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.Jugador2Id)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.Jugador2Id)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.ZonaId)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.ZonaId)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.Etapa)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.Etapa.NombreEtapa)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.PartidoNumero)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.PartidoNumero)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.Cerrado)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.Cerrado)
+            </dd>
+            <dt class="col-sm-2 font2b">
+                @Html.DisplayNameFor(model => model.Ganador)
+            </dt>
+            <dd class="col-sm-10 font2">
+                @Html.DisplayFor(model => model.Ganador)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="PartidoId" />
+            <input type="submit" value="Eliminar" class="btn btn-danger font2" /> <br />
+        </form>
+        <a class="font2" asp-action="Index">Volver a la Lista</a>
+
+    </div>

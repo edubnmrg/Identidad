@@ -1,0 +1,96 @@
+﻿@model Identidad.Models.Torneo2
+
+@{
+    ViewData["Title"] = "Agregar Torneo";
+}
+
+<h1>Agregar Torneo"</h1>
+
+<hr />
+<div class="row font2">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NombreTorneo" class="control-label font2b required-field"></label>
+                <input asp-for="NombreTorneo" class="form-control font2" />
+                <span asp-validation-for="NombreTorneo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClubRefId" class="control-label font2b required-field"></label>
+                <select asp-for="ClubRefId" class="form-control font2" asp-items="ViewBag.ClubFK">
+                    <option value="">Elija un Club...</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatTorRefId" class="control-label font2b required-field"></label>
+                <select asp-for="CatTorRefId" class="form-control font2" asp-items="ViewBag.CatTorFK">
+                    <option value="">Elija una Categoria de Torneo...</option>
+
+                </select>
+                <span asp-validation-for="CatTorRefId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CanJugRefId" class="control-label font2b required-field"></label>
+                <select asp-for="CanJugRefId" class="form-control font2" asp-items="ViewBag.CanJugFK">
+                    <option value="">Elija Cantidad de Jugadores...</option>
+
+                </select>
+                <span asp-validation-for="CanJugRefId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatRefId" class="control-label font2b required-field"></label>
+                <select asp-for="CatRefId" class="form-control font2" asp-items="ViewBag.CatFK">
+                    <option value="">Elija Categoria de Jugadores...</option>
+
+                </select>
+                <span asp-validation-for="CatRefId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JuegoID" class="control-label font2b required-field"></label>
+                <select asp-for="JuegoID" class="form-control font2" asp-items="ViewBag.Juegos">
+                    <option value="">Elija el Juego...</option>
+
+                </select>
+                <span asp-validation-for="JuegoID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SisTorRefId" class="control-label font2b required-field"></label>
+                <select asp-for="SisTorRefId" class="form-control font2" asp-items="ViewBag.SisTorFK">
+                    <option value="">Elija el Sistema del Torneo...</option>
+
+                </select>
+                <span asp-validation-for="SisTorRefId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Desde" class="control-label font2b required-field"></label>
+                <input asp-for="Desde" class="form-control font2" />
+                <span asp-validation-for="Desde" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hasta" class="control-label font2b required-field"></label>
+                <input asp-for="Hasta" class="form-control font2" />
+                <span asp-validation-for="Hasta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorInscripcion" class="control-label font2b required-field"></label>
+                <input asp-for="ValorInscripcion" class="form-control font2" />
+                <span asp-validation-for="ValorInscripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notas" class="control-label font2b required-field"></label>
+                <input size=512 asp-for="Notas" class="form-control font2" />
+                <span asp-validation-for="Notas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary font2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="font2" asp-action="Index">Volver a la Lista</a>
+</div>
+

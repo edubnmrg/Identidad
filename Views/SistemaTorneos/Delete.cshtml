@@ -1,0 +1,40 @@
+﻿@model Identidad.Models.Recursos.SistemaTorneo
+
+@{
+    ViewData["Title"] = "Eliminar Sistema Torneo";
+}
+    <div style="margin-left:3EM">
+        <h1>Eliminar Sistema Torneo</h1>
+
+        <h3>Esta seguro de eliminar este sistema?</h3>
+        <div class="font2">
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.sisTor)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.sisTor)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.CantSets)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CantSets)
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Puntos)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Puntos)
+                </dd>
+                </dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="sisTorID" />
+                <input type="submit" value="Eliminar" class="btn btn-danger font2" />
+            </form>
+            <a class="font2 " asp-action="Index">Volver a la Lista</a>
+
+        </div>
+    </div>

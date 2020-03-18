@@ -1,0 +1,22 @@
+﻿@model CreateRoleViewModel
+
+@{
+    ViewBag.Title = "Agregar Role";
+}
+
+<h1>Crear Nuevo Rol</h1>
+
+<div class="row font2">
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoleName" class="font2b requiered-field"></label>
+                <input asp-for="RoleName" class="form-control font2" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+            <button style="width:auto" type="submit" class="btn btn-primary font2">Crear Rol</button>
+        </form>
+        <a class="font2" asp-controller="Administration" asp-action="ListRoles" >Volver a la Lista</a>
+    </div>
+</div>

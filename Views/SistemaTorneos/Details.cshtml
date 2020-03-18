@@ -1,0 +1,36 @@
+﻿@model Identidad.Models.Recursos.SistemaTorneo
+
+@{
+    ViewData["Title"] = "Detalle Sistemas Torneos";
+}
+    <div style="margin-left:3EM">
+        <h1>Detalle Sistemas Torneos</h1>
+
+        <div class="font2">
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.sisTor)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.sisTor)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.CantSets)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CantSets)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Puntos)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Puntos)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a class="font2 " asp-action="Edit" asp-route-id="@Model.sisTorID">Editar</a> |
+            <a class="font2 " asp-action="Index">Volver a la Lista</a>
+        </div>
+    </div>

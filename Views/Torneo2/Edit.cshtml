@@ -1,0 +1,120 @@
+﻿@model Identidad.Models.Torneo2
+@{
+    ViewData["Title"] = "Editar Torneo";
+}
+
+<h1>Editar Torneo</h1>
+
+<hr />
+<div class="row font2">
+    <div class="col-md-4">
+        <form method="post" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TorneoID" />
+            <div class="form-group">
+                <label asp-for="NombreTorneo" class="control-label font2b required-field"></label>
+                <input asp-for="NombreTorneo" class="form-control font2" />
+                <span asp-validation-for="NombreTorneo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClubRefId" class="control-label font2b required-field"></label>
+                <select asp-for="ClubRefId" class="form-control font2" asp-items="ViewBag.ClubFK">
+                    <option value="@Model.ClubRefId"></option>
+                </select>
+                <span asp-validation-for="ClubRefId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatTorRefId" class="control-label font2b required-field"></label>
+                <select asp-for="CatTorRefId" class="form-control font2" asp-items="ViewBag.CatTorFK">
+                    <option value="@Model.CatTorRefId"></option>
+
+                </select>
+                <span asp-validation-for="CatTorRefId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CanJugRefId" class="control-label font2b required-field"></label>
+                <select asp-for="CanJugRefId" class="form-control font2" asp-items="ViewBag.CanJugFK">
+                    <option value="@Model.CanJugRefId"></option>
+
+                </select>
+
+                <span asp-validation-for="CanJugRefId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatRefId" class="control-label font2b required-field"></label>
+                <select asp-for="CatRefId" class="form-control font2" asp-items="ViewBag.CatFK">
+                    <option value="@Model.CatRefId"></option>
+
+                </select>
+
+                <span asp-validation-for="CatRefId" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <label asp-for="JuegoID" class="control-label font2b required-field"></label>
+                <select asp-for="JuegoID" class="form-control font2" asp-items="ViewBag.Juegos" >
+                    <option value="@Model.JuegoID"></option>
+                </select>
+                <span asp-validation-for="JuegoID" class="text-danger"></span>
+            </div>
+            <div class="form-group" data-provide="datepicker">
+                <label asp-for="Desde" class="control-label font2b required-field"></label>
+                <input asp-for="Desde" class="form-control font2" />
+                <span asp-validation-for="Desde" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="Hasta" class="control-label font2b"></label>
+            <input asp-for="Hasta" class="form-control font2" />
+            <span asp-validation-for="Hasta" class="text-danger"></span>
+        </div>*@
+            <div class="form-group" data-provide="datepicker">
+                <label asp-for="Hasta" class="control-label font2b required-field"></label>
+                <input asp-for="Hasta" class="form-control font2 datepicker" data-date-format="dd/MM/yy">
+                <span asp-validation-for="Hasta" class="text-danger"></span>
+
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorInscripcion" class="control-label font2b required-field"></label>
+                <input asp-for="ValorInscripcion" class="form-control font2" />
+                <span asp-validation-for="ValorInscripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notas" class="control-label font2b required-field"></label>
+                <input size=512 asp-for="Notas" class="form-control font2" />
+                <span asp-validation-for="Notas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InscripcionCerrada" class="control-label font2b required-field"></label>
+                <input type="checkbox" asp-for="InscripcionCerrada" class="form-control font2" />
+                <span asp-validation-for="InscripcionCerrada" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ZonasCerradas" class="control-label font2b required-field"></label>
+                <input type="checkbox" asp-for="ZonasCerradas" class="form-control font2" />
+                <span asp-validation-for="ZonasCerradas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CrucesCerrados" class="control-label font2b required-field"></label>
+                <input type="checkbox" asp-for="CrucesCerrados" class="form-control font2" />
+                <span asp-validation-for="CrucesCerrados" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TorneoCerrado" class="control-label font2b required-field"></label>
+                <input type="checkbox" asp-for="TorneoCerrado" class="form-control font2" />
+                <span asp-validation-for="TorneoCerrado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary font2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="font2" asp-action="Index">Volver a la Lista</a>
+</div>
+

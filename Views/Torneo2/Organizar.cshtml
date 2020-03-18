@@ -1,0 +1,47 @@
+﻿@model Identidad.Models.Torneo2
+
+@{
+    ViewData["Title"] = "Organizar Torneo";
+}
+
+<h1>Organizar Torneo</h1>
+
+<div class="wrapper" style="width:100%">
+    <div class="box" style="width:40%">
+        <div>
+            <table class="table-striped">
+                <thead class="table-dark font2b">
+                    <tr>
+                        <td>
+                            Inscriptos
+                        </td>
+
+                    </tr>
+                </thead>
+                <tboby>
+                    @foreach (var inscripto in Model.Anotaciones)
+                    {
+                        <tr class="font2">
+                            <td>
+                                @inscripto.Perfil.NombreCompleto
+                            </td>
+                        </tr>
+                    }
+                </tboby>
+
+            </table>
+
+        </div>
+        <div class="box" style="width:60%">
+            @foreach (var zona in Model.Zones)
+            {
+                <div>
+                    <label> Zona @zona. </label>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>

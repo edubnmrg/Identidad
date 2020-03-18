@@ -1,0 +1,24 @@
+﻿@model Identidad.Models.Recursos.Juego
+
+@{
+    ViewData["Title"] = "Eliminar Juego";
+}
+<div class="container-fluid" style="margin-left:3EM">
+
+    <h1>Eliminar Juego</h1>
+
+    <h3>Esta seguro de eliminar este juego?</h3>
+    <div>
+
+
+        <dl class="row">
+        </dl>
+
+        <form asp-action="Delete" class="font2">
+            <input asp-for="nombreJuego" />
+            <input type="submit" value="Eliminar" class="btn btn-danger font2" />
+        </form>
+        <a class="font2 " asp-action="Index">Volver a la Lista</a>
+
+    </div>
+    </div>

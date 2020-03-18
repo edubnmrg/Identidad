@@ -1,0 +1,42 @@
+﻿@model Identidad.Models.Clasificado
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Clasificado</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.TorneoID)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.TorneoID)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.PerfilID)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.PerfilID)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Puesto)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Puesto)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Promedio)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Promedio)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ClasificadoID">Edit</a> |
+    <a asp-action="Index">Volver a la Lista</a>
+</div>

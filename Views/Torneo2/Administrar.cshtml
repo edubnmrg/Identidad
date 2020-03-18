@@ -1,0 +1,649 @@
+﻿@model Identidad.ViewModels.Torneo2ViewModel
+
+@{
+    ViewData["Title"] = "Administrar";
+    int zonaActiva = int.Parse(ViewData["activa"].ToString());
+}
+    <div class="container-fluid" style="margin-left:3EM">
+
+        <div class="row" style="width:100%">
+            <div class="col-sm">
+                <h1>Administrar Torneo @Model.Tor.NombreTorneo</h1>
+
+            </div>
+            <div class="col-sm">
+                <nav aria-label="...">
+                    <ul class="pagination font2">
+                        <li>Zona  </li>
+                        @if (zonaActiva > 1)
+                        {
+                            <li class="page-item ">
+                                @{ int zonaAnt = Model.Tor.TorneoID * 100 + (zonaActiva == 1 ? 1 : (zonaActiva - 1));}
+                                @*<span aria-hidden="true">&laquo;</span>*@
+                                <a class="page-link" aria-label="Previous" asp-action="Administrar" asp-route-id="@zonaAnt">
+                                    &laquo;
+                                </a>
+                            </li>
+                        }
+
+                        @foreach (Zone z in Model.Tor.Zones)
+                        {
+
+                            int tz = Model.Tor.TorneoID * 100 + z.Numero;
+
+                            if (z.Numero == zonaActiva)
+                            {
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="#">@z.Numero<span class="sr-only">(current)</span></a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" style="color: #007bff;height:100%" asp-action="Administrar" asp-route-id="@tz">@z.Numero</a>
+                                </li>
+
+
+                            }
+
+                        }
+                        @if (zonaActiva < Model.Tor.Zones.Count())
+                        {
+                            int zonaSig = Model.Tor.TorneoID * 100 + (zonaActiva == Model.Tor.Zones.Count() ? Model.Tor.Zones.Count() : (zonaActiva + 1));
+
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Next" asp-action="Administrar" asp-route-id="@zonaSig">
+                                    @*<span aria-hidden="true">&raquo;</span>*@
+                                    &raquo;
+                                </a>
+                            </li>
+                        }
+
+
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+        @{int tz1 = Model.Tor.TorneoID * 100 + Model.Tor.Zones[zonaActiva - 1].Numero; }
+
+    <form method="post" name="zonasform" asp-action="ActualizarResultados" asp-route-id="@tz1" enctype="multipart/form-data">
+        <input type="hidden" asp-for="@Model.Tor.TorneoID" value="@Model.Tor.TorneoID" />
+        <input type="hidden" asp-for="@Model.ZonaActiva" value="@zonaActiva" />
+        <input type="hidden" asp-for="@Model.Tor.Hasta" value="@Model.Tor.Hasta" />
+        <input type="hidden" asp-for="@Model.Tor.JuegoID" value="@Model.Tor.JuegoID" />
+
+        <div class="container" style="width:100%">
+
+            <div name="jugador1" class="row">
+                <div id="fase1" class="col-sm" style="border-style:solid">
+
+                    <div style="text-align:center">
+                        @*<h3> @Model.Tor.Zones[zonaActiva - 1].ZonaJugadores[0].Perfil.NombreTorneo</h3>*@
+                        <h3>@Model.apellidos[0].ToUpper()</h3>
+
+                    </div>
+
+                    <table id="partido1" class="table-striped font2">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                {
+                                    if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[0].Cerrado) && (((@Model.Partidos[0][2 * i] == 0) && (@Model.Partidos[0][2 * i + 1] == 0)))))
+                                    {
+                                        <th style="text-align:center">
+                                            @(i + 1)
+                                        </th>
+                                    }
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="j1">
+                                @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                {
+                                    //modelo:torneo-zona-partido-set-jugador
+
+                                    int identidad = Model.Tor.TorneoID * 100000000 + @Model.Tor.Zones[zonaActiva - 1].Numero * 1000000 + 10000 + 100 * i + 1;
+                                    if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[0].Cerrado) && (((@Model.Partidos[0][2 * i] == 0) && (@Model.Partidos[0][2 * i + 1] == 0)))))
+                                    {
+                                        <td>
+                                            @if ((@Model.Partidos.Count > 2) || @Model.Tor.Zones[zonaActiva - 1].Partidos[0].Cerrado)
+                                            {
+                                                @Model.Partidos[0][2 * i]
+                                                <input type="hidden" asp-for="@Model.Partidos[0][2 * i]" value="@Model.Partidos[0][2 * i]" />
+
+                                            }
+                                            else
+                                            {
+                                                <input type="number" id="@identidad" asp-for="@Model.Partidos[0][2*i]" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                            }
+                                            @*<input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score1" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />*@
+
+                                        </td>
+                                    }
+
+
+                                }
+
+                            </tr>
+                            <tr class="j2">
+                                @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                {
+                                    int identidad = Model.Tor.TorneoID * 100000000 + @Model.Tor.Zones[zonaActiva - 1].Numero * 1000000 + 10000 + 100 * i + 2;
+                                    if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[0].Cerrado) && (((@Model.Partidos[0][2 * i] == 0) && (@Model.Partidos[0][2 * i + 1] == 0)))))
+                                    {
+                                        <td>
+                                            @if ((@Model.Partidos.Count > 2) || @Model.Tor.Zones[zonaActiva - 1].Partidos[0].Cerrado)
+                                            {
+                                                @Model.Partidos[0][2 * i + 1]
+                                                <input type="hidden" asp-for="@Model.Partidos[0][2 * i + 1]" value="@Model.Partidos[0][2 * i + 1]" />
+
+                                            }
+                                            else
+                                            {
+                                                <input type="number" id="@identidad" asp-for="@Model.Partidos[0][2*i + 1]" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                            }
+                                            @*<input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score1" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />*@
+
+                                        </td>
+                                    }
+                                    @*<td>
+                                    <input type="number" id="@identidad" asp-for="@Model.Partidos[0][2*i+1]" min=" 0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+                                    <input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score2" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                    </td>
+                                    *@
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align:center">
+                        <h3>@Model.apellidos[1].ToUpper()</h3>
+                    </div>
+                    <div style="text-align:center; margin-top:3EM">
+                        <h3>@Model.apellidos[2].ToUpper()</h3>
+                    </div>
+                    <table class="table-striped font2">
+                        <thead class="table-dark">
+                            <tr>
+                                @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                {
+                                    if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[1].Cerrado) && (((@Model.Partidos[1][2 * i] == 0) && (@Model.Partidos[1][2 * i + 1] == 0)))))
+                                    {
+                                        <th style="text-align:center">
+                                            @(i + 1)
+                                        </th>
+                                    }
+                                }
+                            </tr>
+                        </thead>
+                        <tbody id="partido1a">
+                            <tr class="j1">
+                                @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                {
+                                    int identidad = Model.Tor.TorneoID * 100000000 + @Model.Tor.Zones[zonaActiva - 1].Numero * 1000000 + 20000 + 100 * i + 1;
+                                    if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[1].Cerrado) && (((@Model.Partidos[1][2 * i] == 0) && (@Model.Partidos[1][2 * i + 1] == 0)))))
+                                    {
+                                        <td>
+                                            @if ((@Model.Partidos.Count > 2) || @Model.Tor.Zones[zonaActiva - 1].Partidos[1].Cerrado || (Model.apellidos[3] == "-----"))
+                                            {
+                                                @Model.Partidos[1][2 * i]
+                                                <input type="hidden" asp-for="@Model.Partidos[1][2 * i]" value="@Model.Partidos[1][2  * i]" />
+
+                                            }
+                                            else
+                                            {
+                                                <input type="number" id="@identidad" asp-for="@Model.Partidos[1][2*i ]" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                            }
+                                            @*<input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score1" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />*@
+                                            @*-------------------------------------------------------
+                      partidos con jugador faltante
+                    -------------------------------------------------------
+                                            *@
+
+                                        </td>
+                                    }
+                                    @if (Model.apellidos[3] == "-----")
+                                    {
+                                        <td>
+                                            <input type="hidden" asp-for="@Model.Partidos[1][2 * i]" value="@Model.Partidos[1][2  * i]" />
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                            <tr class="j2">
+                                @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                {
+                                    int identidad = Model.Tor.TorneoID * 100000000 + @Model.Tor.Zones[zonaActiva - 1].Numero * 1000000 + 20000 + 100 * i + 2;
+                                    if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[1].Cerrado) && (((@Model.Partidos[1][2 * i] == 0) && (@Model.Partidos[1][2 * i + 1] == 0)))))
+                                    {
+                                        <td>
+                                            @if ((@Model.Partidos.Count > 2) || @Model.Tor.Zones[zonaActiva - 1].Partidos[1].Cerrado || (Model.apellidos[3] == "-----"))
+                                            {
+                                                @Model.Partidos[1][2 * i + 1]
+                                                <input type="hidden" asp-for="@Model.Partidos[1][2 * i  +1]" value="@Model.Partidos[1][2 * i+1]" />
+
+                                            }
+                                            else
+                                            {
+                                                <input type="number" id="@identidad" asp-for="@Model.Partidos[1][2*i + 1]" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                            }
+                                            @*<input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score1" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />*@
+
+                                        </td>
+                                    }
+                                    @if (Model.apellidos[3] == "-----")
+                                    {
+                                        <input type="hidden" asp-for="@Model.Partidos[1][2 * i+1]" value="@Model.Partidos[1][2  * i+1]" />
+
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align:center">
+                        @*<h3> @Model.Tor.Zones[zonaActiva - 1].ZonaJugadores[3].Perfil.NombreTorneo</h3>*@
+                        <h3>@Model.apellidos[3].ToUpper()</h3>
+                    </div>
+
+                </div>
+                <div id="fase2" class="col-sm">
+                    @{ if (Model.Partidos.Count > 2)
+                        {
+                            <div style="border-style:solid">
+                                <div style="text-align:center">
+                                    @*<h3> @Model.Tor.Zones[zonaActiva - 1].ZonaJugadores[1].Perfil.NombreTorneo</h3>*@
+                                    <h2 style="background-color:khaki">GANADORES</h2>
+                                    <h3>@Model.apellidos[4].ToUpper()</h3>
+                                </div>
+                                <table class="table-striped font2">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                            {
+                                                if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[2].Cerrado) && (((@Model.Partidos[2][2 * i] == 0) && (@Model.Partidos[2][2 * i + 1] == 0)))))
+                                                {
+                                                    <th style="text-align:center">
+                                                        @(i + 1)
+                                                    </th>
+                                                }
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="j1">
+
+                                            @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                            {
+                                                int identidad = Model.Tor.TorneoID * 100000000 + @Model.Tor.Zones[zonaActiva - 1].Numero * 1000000 + 30000 + 100 * i + 1;
+                                                if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[2].Cerrado) && (((@Model.Partidos[2][2 * i] == 0) && (@Model.Partidos[2][2 * i + 1] == 0)))))
+                                                {
+                                                    <td>
+                                                        @if ((@Model.Partidos.Count > 4) || @Model.Tor.Zones[zonaActiva - 1].Partidos[2].Cerrado)
+                                                        {
+                                                            @Model.Partidos[2][2 * i]
+                                                            <input type="hidden" asp-for="@Model.Partidos[2][2 * i]" value="@Model.Partidos[2][2 * i]" />
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="number" id="@identidad" asp-for="@Model.Partidos[2][2*i ]" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                                        }
+                                                        @*<input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score1" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />*@
+
+                                                    </td>
+                                                }
+
+                                            }
+                                        </tr>
+                                        <tr class="j2">
+                                            @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                            {
+                                                int identidad = Model.Tor.TorneoID * 100000000 + @Model.Tor.Zones[zonaActiva - 1].Numero * 1000000 + 30000 + 100 * i + 2;
+                                                if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[2].Cerrado) && (((@Model.Partidos[2][2 * i] == 0) && (@Model.Partidos[2][2 * i + 1] == 0)))))
+                                                {
+                                                    <td>
+                                                        @if ((@Model.Partidos.Count > 4) || @Model.Tor.Zones[zonaActiva - 1].Partidos[2].Cerrado)
+                                                        {
+                                                            @Model.Partidos[2][2 * i + 1]
+                                                            <input type="hidden" asp-for="@Model.Partidos[2][2 * i + 1]" value="@Model.Partidos[2][2 * i + 1]" />
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="number" id="@identidad" asp-for="@Model.Partidos[2][2*i + 1]" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                                        }
+                                                        @*<input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score1" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />*@
+
+                                                    </td>
+                                                }
+
+                                            }
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                @*<h3> @Model.Tor.Zones[zonaActiva - 1].ZonaJugadores[2].Perfil.NombreTorneo</h3>*@
+                                <div style="text-align:center">
+                                    <h3>@Model.apellidos[5].ToUpper()</h3>
+                                </div>
+                            </div>
+                            <div style="border-style:solid">
+
+                                <div style="text-align:center">
+                                    <h2 style="background-color:khaki">PERDEDORES</h2>
+
+                                    <h3>@Model.apellidos[6].ToUpper()</h3>
+                                </div>
+
+
+                                <table class="table-striped font2">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                            {
+                                                if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[3].Cerrado) && (((@Model.Partidos[3][2 * i] == 0) && (@Model.Partidos[3][2 * i + 1] == 0)))))
+                                                {
+                                                    <th style="text-align:center">
+                                                        @(i + 1)
+                                                    </th>
+                                                }
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="j1">
+                                            @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                            {
+                                                int identidad = Model.Tor.TorneoID * 100000000 + @Model.Tor.Zones[zonaActiva - 1].Numero * 1000000 + 40000 + 100 * i + 1;
+                                                if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[3].Cerrado) && (((@Model.Partidos[3][2 * i] == 0) && (@Model.Partidos[3][2 * i + 1] == 0)))))
+                                                {
+                                                    <td>
+                                                        @if ((@Model.Partidos.Count > 4) || @Model.Tor.Zones[zonaActiva - 1].Partidos[3].Cerrado)
+                                                        {
+                                                            @Model.Partidos[3][2 * i]
+                                                            <input type="hidden" asp-for="@Model.Partidos[3][2 * i]" value="@Model.Partidos[3][2 * i]" />
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="number" id="@identidad" asp-for="@Model.Partidos[3][2*i ]" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                                        }
+                                                        @*<input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score1" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />*@
+
+                                                    </td>
+                                                }
+                                                @if (Model.apellidos[7] == "-----")
+                                                {
+                                                    <td>
+                                                        <input type="hidden" asp-for="@Model.Partidos[3][2 * i]" value="@Model.Partidos[3][2  * i]" />
+                                                    </td>
+                                                }
+                                            }
+
+                                        </tr>
+                                        <tr class="j2">
+
+                                            @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                            {
+                                                int identidad = Model.Tor.TorneoID * 100000000 + @Model.Tor.Zones[zonaActiva - 1].Numero * 1000000 + 40000 + 100 * i + 2;
+                                                if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[3].Cerrado) && (((@Model.Partidos[3][2 * i] == 0) && (@Model.Partidos[3][2 * i + 1] == 0)))))
+                                                {
+                                                    <td>
+                                                        @if ((@Model.Partidos.Count > 4) || @Model.Tor.Zones[zonaActiva - 1].Partidos[3].Cerrado)
+                                                        {
+                                                            @Model.Partidos[3][2 * i + 1]
+                                                            <input type="hidden" asp-for="@Model.Partidos[3][2 * i + 1]" value="@Model.Partidos[3][2 * i + 1]" />
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="number" id="@identidad" asp-for="@Model.Partidos[3][2*i + 1]" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                                        }
+                                                        @*<input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score1" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />*@
+
+                                                    </td>
+                                                }
+                                                @if (Model.apellidos[7] == "-----")
+                                                {
+                                                    <td>
+                                                        <input type="hidden" asp-for="@Model.Partidos[3][2 * i+1]" value="@Model.Partidos[3][2  * i+1]" />
+                                                    </td>
+                                                }
+                                            }
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div style="text-align:center">
+                                    <h3>@Model.apellidos[7].ToUpper()</h3>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div id="fase3" class="col-sm" style="text-align:center">
+
+
+                    @if (Model.Tor.Zones[zonaActiva - 1].Partidos.Count > 4)
+
+                    {
+                        <div style="border-style:solid">
+                            <h3>PRIMERO</h3>
+                            <h3 style="background-color:white">@Model.Tor.Zones[zonaActiva - 1].ZonaJugadores.FirstOrDefault(j => j.PerfilID == @Model.Tor.Zones[zonaActiva - 1].Partidos[2].Ganador).Perfil.NombreTorneo.ToUpper()</h3>
+                            @if (Model.Tor.Zones[zonaActiva - 1].Partidos[4].Cerrado)
+                            {
+                                <h3>SEGUNDO</h3>
+                                <h3 style="background-color:wheat">@Model.Tor.Zones[zonaActiva - 1].ZonaJugadores.FirstOrDefault(j => j.PerfilID == @Model.Tor.Zones[zonaActiva - 1].Partidos[4].Ganador).Perfil.NombreTorneo.ToUpper()</h3>
+
+                            }
+                        </div>
+                        <div style="border-style:solid;margin-top:3EM">
+                            <div style="text-align:center">
+                                <h2 style="background-color:khaki">REPECHAJE</h2>
+
+                                <h3>@Model.apellidos[8].ToUpper()</h3>
+                            </div>
+
+                            <table class="table-striped font2">
+                                <thead class="table-dark">
+                                    <tr>
+                                        @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                        {
+                                            if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[4].Cerrado) && (((@Model.Partidos[4][2 * i] == 0) && (@Model.Partidos[4][2 * i + 1] == 0)))))
+                                            {
+                                                <th style="text-align:center">
+                                                    @(i + 1)
+                                                </th>
+                                            }
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="j1">
+
+                                        @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                        {
+                                            int identidad = Model.Tor.TorneoID * 100000000 + @Model.Tor.Zones[zonaActiva - 1].Numero * 1000000 + 50000 + 100 * i + 1;
+                                            if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[4].Cerrado) && (((@Model.Partidos[4][2 * i] == 0) && (@Model.Partidos[4][2 * i + 1] == 0)))))
+                                            {
+                                                <td>
+                                                    @if (@Model.Tor.Zones[zonaActiva - 1].Partidos[4].Cerrado)
+                                                    {
+                                                        @Model.Partidos[4][2 * i]
+                                                        <input type="hidden" asp-for="@Model.Partidos[4][2 * i]" value="@Model.Partidos[4][2 * i]" />
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="number" id="@identidad" asp-for="@Model.Partidos[4][2*i ]" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                                    }
+                                                    @*<input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score1" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />*@
+                                                    @if (Model.apellidos[9] == "-----")
+                                                    {
+                                                        <input type="hidden" asp-for="@Model.Partidos[4][2 * i]" value="@Model.Partidos[4][2  * i]" />
+
+                                                    }
+                                                </td>
+                                            }
+                                            @*<td>
+                                            <input type="number" id="@identidad" asp-for="@Model.Partidos[0][2*i+1]" min=" 0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+                                            <input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score2" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                            </td>
+                                            *@
+                                        }
+
+
+                                    </tr>
+                                    <tr class="j2">
+
+                                        @for (int i = 0; i < @Model.Tor.SisTor.CantSets; i++)
+                                        {
+                                            int identidad = Model.Tor.TorneoID * 100000000 + @Model.Tor.Zones[zonaActiva - 1].Numero * 1000000 + 50000 + 100 * i + 2;
+                                            if (!((@Model.Tor.Zones[zonaActiva - 1].Partidos[4].Cerrado) && (((@Model.Partidos[4][2 * i] == 0) && (@Model.Partidos[4][2 * i + 1] == 0)))))
+                                            {
+                                                <td>
+                                                    @if (@Model.Tor.Zones[zonaActiva - 1].Partidos[4].Cerrado)
+                                                    {
+                                                        @Model.Partidos[4][2 * i + 1]
+                                                        <input type="hidden" asp-for="@Model.Partidos[4][2 * i + 1]" value="@Model.Partidos[4][2 * i + 1]" />
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="number" id="@identidad" asp-for="@Model.Partidos[4][2*i + 1]" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                                    }
+                                                    @*<input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score1" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />*@
+                                                    @if (Model.apellidos[9] == "-----")
+                                                    {
+                                                        <input type="hidden" asp-for="@Model.Partidos[4][2 * i+1]" value="@Model.Partidos[4][2  * i+1]" />
+
+                                                    }
+                                                </td>
+                                            }
+                                            @*<td>
+                                            <input type="number" id="@identidad" asp-for="@Model.Partidos[0][2*i+1]" min=" 0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+                                            <input type="number" id="@identidad" asp-for="@Model.Tor.Zones[@Model.ZonaActiva].Partidos[0].Scores[i].Score2" min="0" max="@Model.Tor.SisTor.Puntos" style="border:2px solid; width:60px" class="font2" onchange="ControlScores(this,@Model.Tor.SisTor.Puntos)" />
+
+                                            </td>
+                                            *@
+                                        }
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <h3> @Model.apellidos[9].ToUpper()</h3>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        @if (Model.Partidos.Count() == 5)
+        {
+            if (!@Model.Tor.Zones[zonaActiva - 1].Partidos[4].Cerrado)
+            {
+                <button type="submit" id="actualizar" class="btn btn-primary font2">Actualizar Resultados</button>
+
+            }
+        }
+        else
+        {
+            <button type="submit" id="actualizar" class="btn btn-primary font2">Actualizar Resultados</button>
+
+        }
+        @if (Model.Tor.ZonasCerradas)
+        {
+            <a class="btn btn-primary font2" asp-action="AdministrarCruces" asp-route-id="@Model.Tor.TorneoID">Cruces</a>
+
+        }
+        @if (Model.Tor.CrucesCerrados)
+        {
+            <a class="btn btn-primary font2" asp-action="AdministrarEliminatoria" asp-route-id="@Model.Tor.TorneoID">Eliminatoria</a>
+
+        }
+
+    </form>
+    </div>
+        @section Scripts{
+
+            <script>
+                function ControlScores(e, puntos) {
+                    //console.log(e.id, e.value,puntos);
+                    if (e.value > puntos) { alert("El maximo valor permitido es: " + puntos); }
+                    if (e.value < 0) { alert("El minimo valor permitido es: 0"); }
+                    let j1 = (parseInt(e.id, 10)) % 100
+                    console.log("j1 antes " + j1)
+                    switch (j1) {
+                        case 0:
+                            j1 = 1
+                            break;
+                        case 1:
+                            j1 = 0
+                            break;
+                        case 2:
+                            j1 = 3
+                            break;
+                        case 3:
+                            j1 = 2
+                            break;
+                    }
+                    console.log("j1 despues " + j1)
+
+                    let x = e.id.substr(0, e.id.length - 2)
+                    console.log("x" + x)
+                    let z = (parseInt(x, 10) * 100 + j1).toString().trim()
+                    console.log("z" + z)
+                    j2 = document.getElementById(z)
+                    console.log("j2 value " + j2)
+                    switch (e.value) {
+                        case 60:
+                            if (j2.value == 60) { aler("No pueden sen ambos valores de " + puntos) }
+                            break;
+                        default:
+                            break;
+
+                    }
+
+                }
+            </script>
+            <script>
+                $('form input').keydown(function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+            </script>
+            <script>
+                function ControlarZonas() {
+                    $("#zona1.children").each(function (index) {
+                        console.log($(this).value);
+                        return true;
+                    })
+            </script>
+            <script>
+                $("#zonaform").submit(function (event) {
+
+                    // do all your validation if need here
+
+                    if (!ControlarZonas()) {
+                        event.preventDefault();
+                    }
+                });
+            </script>
+        }
+

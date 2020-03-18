@@ -1,0 +1,32 @@
+﻿@model Identidad.Models.PresidenteClub
+
+@{
+    ViewData["Title"] = "Detalle Presidentes Club";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="container-fluid" style="margin-left:2EM">
+
+        <h1>Detalle Presidentes Club</h1>
+
+        <div>
+            <dl class="row">
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Club)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Club.NombreClub)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Perfil.nombre)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Perfil.NombreCompleto)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a class="btn btn-primary font2" asp-action="Edit" asp-route-id="@Model.PresClubID">Editar</a>
+        </div>
+        <a class="font2" asp-action="Index">Volver a la Lista</a>
+
+    </div>

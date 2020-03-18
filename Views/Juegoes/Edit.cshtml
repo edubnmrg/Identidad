@@ -1,0 +1,28 @@
+﻿@model Identidad.Models.Recursos.Juego
+
+@{
+    ViewData["Title"] = "Editar Juego";
+}
+<div class="container-fluid" style="margin-left:3EM">
+
+    <h1>Editar Juego</h1>
+
+    @{ var ant = Model.nombreJuego; }
+    <hr />
+    <div class="row font2">
+        <div class="col-md-4">
+            <form asp-action="Edit" asp-route-id="@ant">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="nombreJuego" />
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary font2" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a class="font2 " asp-action="Index">Volver a la Lista</a>
+    </div>
+
+</div>

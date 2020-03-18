@@ -1,0 +1,131 @@
+﻿@model Identidad.Models.Federacion
+
+@{
+    ViewData["Title"] = "Detalle Federacion";
+}
+<div class="container-fluid" style="margin-left:3EM">
+    <h1>Detalle Federacion</h1>
+
+    <div class="row font2">
+        <div class="col">
+            <dl class="row">
+
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.nombre)
+                </dt>
+
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.nombre)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.sigla)
+                </dt>
+
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.sigla)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.calle)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.calle)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.altura)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.altura)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.ciudad)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ciudad)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.provinciaID)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Provincia.nombre)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.fedEmail)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.fedEmail)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.FedUrl)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FedUrl)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.telefono)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.telefono)
+                </dd>
+            </dl>
+        </div>
+        <div class="col">
+            <table class="table-striped font2">
+                <thead class="table-dark">
+                    <tr>
+                        <th>
+                            Presidente
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        @if (Model.PresFedID == 0)
+                        {
+                            <td> <a class="font2" asp-controller="PresidentesFederacion" asp-action="Create">Agregar</a></td>
+;
+
+                        }
+                        else
+                        {
+                            <td>@Model.PresFedID</td>
+
+
+                        }
+                    </tr>
+
+
+
+                </tbody>
+            </table>
+            <table class="table-striped font2" style="margin-top:3EM">
+                <thead class="table-dark">
+                    <tr>
+                        <th>
+                            Apoderados
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ApoderadoFederacion a in Model.ApoderadosFederacion)
+                    {
+                        <tr>
+                            <td>@a.Perfil.NombreCompleto</td>
+                        </tr>
+                    }
+                    @if (Model.ApoderadosFederacion.Count() < 3)
+                    {
+                        <tr>
+                            <td> <a class="font2" asp-controller="ApoderadosFederacion" asp-action="Create">Agregar</a></td>;
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <a class="btn btn-primary font2" asp-action="Edit" asp-route-id="@Model.FederacionID">Editar</a><br />
+        <a class="font2" asp-action="Index">Volver a la Lista</a>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+﻿@model Identidad.Models.Perfil
+
+@{
+    ViewData["Title"] = "Eliminar Perfil";
+    var photoPath = "~/img/fotosPerfiles/" + (Model.fotoPath ?? "5q.png");
+
+}
+
+    <h1>Eliminar Perfil</h1>
+
+<h3>Esta seguro de eliminar este perfil?</h3>
+<div>
+    <hr />
+    <dl class="row" style="margin-left:10px">
+        <dt class = " col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt> 
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.apellido)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.apellido)
+        </dd>
+        <dt class = " col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.tDocID)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.tipoDeDocumento.tipoDeDocumento)
+        </dd>
+        <dt class = " col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.numeroDocumento)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.numeroDocumento)
+        </dd>
+        <dt class = " col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.calle)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.calle)
+        </dd>
+        <dt class = " col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.altura)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.altura)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.ciudad)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.ciudad)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.provinciaID)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Provincia.nombre)
+        </dd>
+      
+        <dt class = " col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.telefono)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+        <dt class = " col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.celular)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.celular)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.club)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.club.NombreClub)
+        </dd class>
+        @*<dt class = " col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.foto)
+        </dt>
+        <dd class = "col-sm- col-sm-10 font2">
+            @Html.DisplayFor(model => model.foto)
+        </dd>*@
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.fotoPath)
+        </dt>
+        <dd class="col-sm-10 font2">
+            <img id="perfilFoto" src="@photoPath" style="border:2px solid;max-height:100px" asp-append-version="true" />
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Eliminar" class="btn btn-danger font2" />
+        <a class="font2 " asp-action="Index">Volver a la Lista</a>
+    </form>
+</div>

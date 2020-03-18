@@ -1,0 +1,148 @@
+﻿@model Club
+
+@{
+    ViewData["Title"] = "Detalle Club";
+}
+    <div class="container-fluid" style="margin-left:2EM">
+
+        <h1>Detalle Club</h1>
+
+        <div class="row">
+            <div class="col">
+            <dl class="row">
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.NombreClub)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.NombreClub)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.SiglaClub)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.SiglaClub)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Calle)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Calle)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Altura)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Altura)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Ciudad)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Ciudad)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.ProvinciaID)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Provincia.nombre)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.ClubEmail)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.ClubEmail)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.ClubUrl)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.ClubUrl)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Telefono)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Telefono)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.FederacionID)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Federacion.nombre)
+                </dd>
+            </dl>
+                </div>
+            <div class="col">
+                <table class="table-striped font2">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>
+                                Presidente
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        @if (Model.PresidenteClub == null)
+                        {
+                            <tr>
+                                <td> <a class="font2" asp-controller="PresidentesClub" asp-action="Create" asp-rute-id="@Model.ClubID">Agregar</a></td>
+                            </tr>
+
+
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>@Model.PresidenteClub.Perfil.NombreCompleto</td>
+                            </tr>
+                            <tr>
+                                <td> <a class="font2" asp-controller="PresidentesClub" asp-action="Delete" asp-rute-id="@Model.ClubID">Eliminar</a></td>
+                            </tr>
+                        }
+
+
+
+
+                    </tbody>
+                </table>
+                <table class="table-striped font2" style="margin-top:3EM">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>
+                                Apoderados
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (ApoderadoClub a in Model.ApoderadosClub)
+                        {
+                            <tr>
+                                <td>@a.Perfil.NombreCompleto</td>
+                            </tr>
+                        }
+                        @if (Model.ApoderadosClub.Count() < 3)
+                        {
+                            <tr>
+                                <td> <a class="font2" asp-controller="ApoderadosClub" asp-action="Create" asp-route-id="@Model.ClubID">Agregar</a></td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td> <a class="font2" asp-controller="ApoderadosClub" asp-action="Index" >Administrar</a></td>
+                            </tr>
+
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-primary font2 " asp-action="Edit" asp-route-id="@Model.ClubID">Editar</a><br />
+            <a class="font2 " asp-action="Index">Volver a la Lista</a>
+        </div>
+        </div>

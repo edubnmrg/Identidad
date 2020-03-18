@@ -1,0 +1,41 @@
+﻿@model Identidad.Models.Inscripcion
+
+@{
+    ViewData["Title"] = "Editar Inscripciones";
+}
+
+    <h1>Editar Inscripciones</h1>
+
+<hr />
+<div class="row font2">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="InscripcionID" />
+            <div class="form-group">
+                <label asp-for="PerfilFK" class="control-label font2b"></label>
+                <select asp-for="PerfilFK" class="form-control" asp-items="ViewBag.PerfilFK">
+                    <option value="@Model.PerfilFK"></option>
+
+                </select>
+                <span asp-validation-for="PerfilFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TorneoFK" class="control-label font2b"></label>
+                <select asp-for="TorneoFK" class="form-control" asp-items="ViewBag.TorneoFK">
+                    <option value="@Model.TorneoFK"></option>
+
+                </select>
+                <span asp-validation-for="TorneoFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="font2 " asp-action="Index">Volver a la Lista</a>
+</div>
+

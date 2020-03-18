@@ -1,0 +1,31 @@
+﻿@model Identidad.Models.ApoderadoFederacion
+
+@{
+    ViewData["Title"] = "Detalle Apoderado Federacion";
+}
+    <div class="container-fluid" style="margin-left:2EM">
+
+        <h1>Detalle Apoderado Federacion</h1>
+
+        <div>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Federacion.nombre)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Federacion.nombre)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Perfil.NombreCompleto)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Perfil.NombreCompleto)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ApoFedID">Editar</a>
+        </div>
+        <a class="font2" asp-action="Index">Volver a la Lista</a>
+
+    </div>

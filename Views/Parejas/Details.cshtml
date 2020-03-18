@@ -1,0 +1,29 @@
+﻿@model Identidad.Models.Pareja
+
+@{
+    ViewData["Title"] = "Detalle Pareja";
+}
+
+<h1>Detalle Pareja</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Jugador1)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Perfil1.NombreCompleto)
+        </dd>
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Jugador2)
+        </dt>
+        <dd class = "col-sm-10 font2">
+            @Html.DisplayFor(model => model.Perfil2.NombreCompleto)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="font2 " asp-action="Edit" asp-route-id="@Model.ParejaID">Editar</a> |
+    <a class="font2 " asp-action="Index">Volver a la Lista</a>
+</div>

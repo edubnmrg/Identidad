@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Identidad.Models.Recursos.Ciudad>
+
+@{
+    ViewData["Title"] = "Ciudades";
+}
+
+<h1>Ciudades</h1>
+
+<p>
+    <a class="font2 " asp-action="Create">Agregar</a>
+</p>
+<table class="table table-stripped font2">
+    <thead class="table-dark">
+        <tr class="font2b">
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProvinciaID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Provincia.nombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CiudadID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.CiudadID">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.CiudadID">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

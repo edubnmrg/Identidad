@@ -1,0 +1,30 @@
+﻿@model Identidad.Models.ApoderadoClub
+
+@{
+    ViewData["Title"] = "Detalle Apoderado Club";
+}
+    <div class="container-fluid" style="margin-left:2EM">
+        <h1>Detalle Apoderado Club</h1>
+
+        <div>
+            <dl class="row">
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Club.NombreClub)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Club.NombreClub)
+                </dd>
+                <dt class="col-sm-2 font2b">
+                    @Html.DisplayNameFor(model => model.Perfil.NombreCompleto)
+                </dt>
+                <dd class="col-sm-10 font2">
+                    @Html.DisplayFor(model => model.Perfil.NombreCompleto)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a class="btn btn-primary font2" asp-action="Edit" asp-route-id="@Model.ApoClubID">Editar</a>
+        </div>
+        <a class="font2" asp-action="Index">Volver a la Lista</a>
+
+    </div>

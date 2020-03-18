@@ -1,0 +1,147 @@
+﻿@model Identidad.Models.Club
+
+@{
+    ViewData["Title"] = "Editar Club";
+}
+
+<h1>Editar Club</h1>
+
+<hr />
+<div class="row font2">
+    <div class="col-md-6">
+        <form method="post" asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ClubID" />
+            <div class="form-group">
+                <label asp-for="NombreClub" class="control-label font2b"></label>
+                <input asp-for="NombreClub" class="form-control font2" />
+                <span asp-validation-for="NombreClub" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SiglaClub" class="control-label font2b"></label>
+                <input asp-for="SiglaClub" class="form-control font2" />
+                <span asp-validation-for="SiglaClub" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Calle" class="control-label font2b"></label>
+                <input asp-for="Calle" class="form-control font2" />
+                <span asp-validation-for="Calle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Altura" class="control-label font2b"></label>
+                <input asp-for="Altura" class="form-control font2" />
+                <span asp-validation-for="Altura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ciudad" class="control-label font2b"></label>
+                <input asp-for="Ciudad" class="form-control font2" />
+                <span asp-validation-for="Ciudad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProvinciaID" class="control-label font2b"></label>
+                <select asp-for="ProvinciaID" class="form-control font2" asp-items="ViewBag.provinciaID">
+                    <option value="@Model.ProvinciaID"></option>
+                </select>
+                <span asp-validation-for="ProvinciaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClubEmail" class="control-label font2b"></label>
+                <input asp-for="ClubEmail" class="form-control font2" />
+                <span asp-validation-for="ClubEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClubUrl" class="control-label font2b"></label>
+                <input asp-for="ClubUrl" class="form-control font2" />
+                <span asp-validation-for="ClubUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label font2b"></label>
+                <input asp-for="Telefono" class="form-control font2" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FederacionID" class="control-label font2b"></label>
+                <select asp-for="FederacionID" class="form-control font2" asp-items="ViewBag.FedID">
+                    <option value="@Model.FederacionID">Elija una Federacion...</option>
+                </select>
+                <span asp-validation-for="FederacionID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary font2" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <table class="table-striped font2">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        Presidente
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @if (Model.PresidenteClub == null)
+                {
+                    <tr>
+                        <td> <a class="font2" asp-controller="PresidentesClub" asp-action="Create" asp-route-id="@Model.ClubID">Agregar</a></td>
+                    </tr>
+
+
+                }
+                else
+                {
+                    <tr>
+                        <td>@Model.PresidenteClub.Perfil.NombreCompleto</td>
+                    </tr>
+                    <tr>
+                        <td> <a class="font2" asp-controller="PresidentesClub" asp-action="Delete" asp-route-id="@Model.ClubID">Eliminar</a></td>
+                    </tr>
+                }
+
+
+
+
+            </tbody>
+        </table>
+        <table class="table-striped font2" style="margin-top:3EM">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        Apoderados
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ApoderadoClub a in Model.ApoderadosClub)
+                {
+                    <tr>
+                        <td>@a.Perfil.NombreCompleto</td>
+                    </tr>
+                }
+                @if (Model.ApoderadosClub.Count() < 3)
+                {
+                    <tr>
+                        <td> <a class="font2" asp-controller="ApoderadosClub" asp-action="Create" asp-route-id="@Model.ClubID">Agregar</a></td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td> <a class="font2" asp-controller="ApoderadosClub" asp-action="Index">Administrar</a></td>
+                    </tr>
+
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <a class="font2 " asp-action="Index">Volver a la Lista</a>
+    </div>
+
+</div>

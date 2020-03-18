@@ -1,0 +1,1 @@
+﻿insert into clasificados select TorneoID, PerfilID, Promedio, Puesto from eliminados

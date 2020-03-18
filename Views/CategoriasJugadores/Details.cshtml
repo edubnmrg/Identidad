@@ -1,0 +1,29 @@
+﻿@model Identidad.Models.CategoriaJugador
+
+@{
+    ViewData["Title"] = "Detalle Categorias";
+}
+
+    <h1>Detalle Categorias</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Perfil)
+        </dt>
+       
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Juego)
+        </dt>
+        
+        <dt class = "col-sm-2 font2b">
+            @Html.DisplayNameFor(model => model.Categoria)
+        </dt>
+        
+    </dl>
+</div>
+<div>
+    <a class="font2 " asp-action="Edit" asp-route-id="@Model.CategoriaJugadorID">Editar</a> |
+    <a class="font2 " asp-action="Index">Volver a la Lista</a>
+</div>

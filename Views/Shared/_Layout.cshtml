@@ -1,0 +1,197 @@
+﻿@inject SignInManager<Usuario> signInManager;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - 5 Quillas</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-light  border-bottom box-shadow mb-3 fondo">
+            <div class="container" style="width:100%;margin:0px; padding:0px">
+
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/img/5qsin fondo.png" style="max-height:100px"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-lg-inline-flex flex-lg-row-reverse font2">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        @*<li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </li>*@
+                        @if (User.IsInRole("Administrador") || User.IsInRole("Dueño"))
+                        {
+                            <li class="nav-item">
+                            </li>
+
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Usuarios
+                                </a>
+                                <div class="dropdown-menu font2" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Administration" asp-action="ListUsers">Usuarios</a>
+
+                                    <a class="dropdown-item" asp-area="" asp-controller="Administration"
+                                       asp-action="ListRoles">Listar Roles</a>
+
+                                    <a class="dropdown-item" asp-controller="Administration"
+                                       asp-action="EditUser" asp-route-userId="@User.Identity.Name">Roles de Usuario</a>
+                                    <a class="dropdown-item" asp-controller="Administration"
+                                       asp-action="ManageUserClaims">Claims de Usuario</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Recursos
+                                </a>
+                                <div class="dropdown-menu font2" aria-labelledby="navbarDropdownMenuLink">
+
+                                    <a class="dropdown-item" asp-controller="Provincias"
+                                       asp-action="Index">Provincias</a>
+                                    <a class="dropdown-item" asp-controller="Ciudads"
+                                       asp-action="Index">Ciudades</a>
+                                    <a class="dropdown-item" asp-controller="Calles"
+                                       asp-action="Index">Calles</a>
+                                    <a class="dropdown-item" asp-controller="TipoDocumentos"
+                                       asp-action="Index">Tipos de Documento</a>
+                                    <a class="dropdown-item" asp-controller="Juegoes"
+                                       asp-action="Index">Juegos</a>
+                                    <a class="dropdown-item" asp-controller="Categorias"
+                                       asp-action="Index">Categorias</a>
+                                    <a class="dropdown-item" asp-controller="CategoriaTorneos"
+                                       asp-action="Index">Categorias Torneos</a>
+                                    <a class="dropdown-item" asp-controller="SistemaTorneos"
+                                       asp-action="Index">Sistemas Torneos</a>
+                                    <a class="dropdown-item" asp-controller="CantidadJugadores"
+                                       asp-action="Index">Cantidad de Jugadores</a>
+                                    <a class="dropdown-item" asp-controller="Etapas"
+                                       asp-action="Index">Etapas</a>
+                                </div>
+                            </li>
+                        }
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Entidades
+                            </a>
+                            <div class="dropdown-menu font2" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Federacions"
+                                   asp-action="Index">Federaciones</a>
+                                <a class="dropdown-item" asp-controller="Clubs"
+                                   asp-action="Index">Clubes</a>
+                                @if (User.IsInRole("Dueño"))
+                                {
+                            <a class="dropdown-item" asp-controller="PresidentesFederacion"
+                               asp-action="Index">Presidentes Federacion</a>
+                            <a class="dropdown-item" asp-controller="ApoderadosFederacion"
+                               asp-action="Index">Apoderados Federacion</a>
+                            <a class="dropdown-item" asp-controller="PresidentesClub"
+                               asp-action="Index">Presidentes Club</a>
+                            <a class="dropdown-item" asp-controller="ApoderadosClub"
+                               asp-action="Index">Apoderados Club</a>
+                                }
+
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Torneos
+                            </a>
+                            <div class="dropdown-menu font2" aria-labelledby="navbarDropdownMenuLink">
+
+                                <a class="dropdown-item" asp-controller="Torneo2"
+                                   asp-action="Index">Torneos</a>
+                                <a class="dropdown-item" asp-controller="Anotaciones"
+                                   asp-action="Index">Inscripciones</a>
+                                <a class="dropdown-item" asp-controller="Torneo2"
+                                   asp-action="VerZonas">Zonas</a>
+                                <a class="dropdown-item" asp-controller="Partidos"
+                                   asp-action="Index">Partidos</a>
+                                <a class="dropdown-item" asp-controller="Clasificados"
+                                   asp-action="Index">Clasificados</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Jugadores
+                            </a>
+                            <div class="dropdown-menu font2" aria-labelledby="navbarDropdownMenuLink">
+
+                                <a class="dropdown-item" asp-controller="Perfils"
+                                   asp-action="Index">Jugadores</a>
+                                <a class="dropdown-item" asp-controller="Parejas"
+                                   asp-action="Index">Parejas</a>
+                                <a class="dropdown-item" asp-controller="CategoriasJugadores"
+                                   asp-action="Index">Categorias de Jugadores</a>
+
+                                <a class="dropdown-item" asp-controller="Rankings2"
+                                   asp-action="Index">Rankings</a>
+                                <a class="dropdown-item" asp-controller="Galerias"
+                                   asp-action="Index">Galeria</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="navbar-nav ml-auto">
+                    @if (signInManager.IsSignedIn(User))
+
+                    {
+                        <li class="nav-item">
+                            <form method="get" asp-action="Details" asp-controller="Perfils" asp-route-id="">
+                                <button type="submit" class="nav-link btn btn-link py-0 font2"
+                                        style="width:auto">
+                                    Mi Perfil
+                                </button>
+                            </form>
+                        </li>
+                        <li class="nav-item pull-right">
+                            <form method="post" asp-action="logout" asp-controller="account">
+                                <button type="submit" class="nav-link btn btn-link py-0 font2"
+                                        style="width:auto">
+                                    Cerrar Sesion @User.Identity.Name
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a asp-action="register" asp-controller="account" class="nav-link font2">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="login" asp-controller="account" class="nav-link font2">Entrar</a>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container fondo" style="width: 100%; margin:0px; padding:0px;">
+            @RenderBody()
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container fondo">
+            &copy; 2020 - 5 Quillas - <a asp-area="" asp-controller="Home" asp-action="Ayuda"> Ayuda </a>- <a asp-area="" asp-controller="Home" asp-action="Privacy">Acerca de...</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

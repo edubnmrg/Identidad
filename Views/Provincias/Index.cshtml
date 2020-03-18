@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Provincia>
+
+@{
+    ViewData["Title"] = "Provincias";
+}
+
+    <h1>Provincias</h1>
+
+<p>
+    <a class="font2 " asp-action="Create">Agregar</a>
+</p>
+<table class="table table-striped font2">
+    <thead class="thead-dark">
+        <tr class="font2b">
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th></th>
+        </tr>
+    </thead >
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td style="width:auto">
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+         
+        </tr>
+}
+    </tbody>
+</table>
