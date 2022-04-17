@@ -43,6 +43,8 @@
     <Compile Remove="Migrations\20200316210617_presfed200316.Designer.cs" />
     <Compile Remove="Migrations\20200317011713_clubpresidente2.cs" />
     <Compile Remove="Migrations\20200317011713_clubpresidente2.Designer.cs" />
+    <Compile Remove="Migrations\20220417134916_torneozona.cs" />
+    <Compile Remove="Migrations\20220417134916_torneozona.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -7,83 +7,83 @@
     <div class="container-fluid" style="margin-left:3EM">
         <h1>Detalle Perfil</h1>
         <div class="row">
-            <div class="col">
+            <div class="col-sm-8">
                 <hr />
                 <dl class="row">
-                    <dt class="col-sm-2 font2b">
+                    <dt class="col-sm-4 font2b">
                         @Html.DisplayNameFor(model => model.Perfil.nombre)
                     </dt>
-                    <dd class="col-sm-10 font2">
+                    <dd class="col-sm-8 font2">
                         @Html.DisplayFor(model => model.Perfil.nombre)
                     </dd>
-                    <dt class="col-sm-2 font2b">
+                    <dt class="col-sm-4 font2b">
                         @Html.DisplayNameFor(model => model.Perfil.apellido)
                     </dt>
-                    <dd class="col-sm-10 font2">
+                    <dd class="col-sm-8 font2">
                         @Html.DisplayFor(model => model.Perfil.apellido)
                     </dd>
-                    <dt class="col-sm-2 font2b">
+                    <dt class="col-sm-4 font2b">
                         @Html.DisplayNameFor(model => model.Perfil.tDocID)
                     </dt>
-                    <dd class="col-sm-10 font2">
+                    <dd class="col-sm-8 font2">
                         @Html.DisplayFor(model => model.Perfil.tDocID)
                     </dd>
-                    <dt class="col-sm-2 font2b">
+                    <dt class="col-sm-4 font2b">
                         @Html.DisplayNameFor(model => model.Perfil.numeroDocumento)
                     </dt>
-                    <dd class="col-sm-10 font2">
+                    <dd class="col-sm-8 font2">
                         @Html.DisplayFor(model => model.Perfil.numeroDocumento)
                     </dd>
-                    <dt class="col-sm-2 font2b">
+                    <dt class="col-sm-4 font2b">
                         @Html.DisplayNameFor(model => model.Perfil.calle)
                     </dt>
-                    <dd class="col-sm-10 font2">
+                    <dd class="col-sm-8 font2">
                         @Html.DisplayFor(model => model.Perfil.calle)
                     </dd>
-                    <dt class="col-sm-2 font2b">
+                    <dt class="col-sm-4 font2b">
                         @Html.DisplayNameFor(model => model.Perfil.altura)
                     </dt>
-                    <dd class="col-sm-10 font2">
+                    <dd class="col-sm-8 font2">
                         @Html.DisplayFor(model => model.Perfil.altura)
                     </dd>
-                    <dt class="col-sm-2 font2b">
+                    <dt class="col-sm-4 font2b">
                         @Html.DisplayNameFor(model => model.Perfil.ciudad)
                     </dt>
-                    <dd class="col-sm-10 font2">
+                    <dd class="col-sm-8 font2">
                         @Html.DisplayFor(model => model.Perfil.ciudad)
                     </dd>
 
-                    <dt class="col-sm-2 font2b">
+                    <dt class="col-sm-4 font2b">
                         @Html.DisplayNameFor(model => model.Perfil.Provincia.nombre)
                     </dt>
-                    <dd class="col-sm-10 font2">
+                    <dd class="col-sm-8 font2">
                         @Html.DisplayFor(model => model.Perfil.Provincia.nombre)
                     </dd>
-                    <dt class="col-sm-2 font2b">
+                    <dt class="col-sm-4 font2b">
                         @Html.DisplayNameFor(model => model.Perfil.Email)
                     </dt>
-                    <dd class="col-sm-10 font2">
+                    <dd class="col-sm-8 font2">
                         @Html.DisplayFor(model => model.Perfil.Email)
                     </dd>
-                    <dt class="col-sm-2 font2b">
+                    <dt class="col-sm-4 font2b">
                         @Html.DisplayNameFor(model => model.Perfil.telefono)
                     </dt>
-                    <dd class="col-sm-10 font2">
+                    <dd class="col-sm-8 font2">
                         @Html.DisplayFor(model => model.Perfil.telefono)
                     </dd>
-                    <dt class="col-sm-2 font2b">
+                    <dt class="col-sm-4 font2b">
                         @Html.DisplayNameFor(model => model.Perfil.celular)
                     </dt>
-                    <dd class="col-sm-10 font2">
+                    <dd class="col-sm-8 font2">
                         @Html.DisplayFor(model => model.Perfil.celular)
                     </dd>
-                    <dt class="col-sm-2 font2b">
+                    <dt class="col-sm-4 font2b">
                         @Html.DisplayNameFor(model => model.Perfil.club)
                     </dt>
-                    <dd class="col-sm-10 font2">
+                    <dd class="col-sm-8 font2">
                         @Html.DisplayFor(model => model.Perfil.club.NombreClub)
                     </dd>
-                    @*<dt class="col-sm-2 font2b">
+                    @*<dt class="col-sm-4 font2b">
                     @Html.DisplayNameFor(model => model.foto)
                 </dt>
                 <dd class="col-sm-10 font2">
@@ -96,9 +96,17 @@
                         <img id="perfilFoto" style="border:2px solid;max-height:100px" />
                     }
                 </dd>*@
-                    </dl>
-                    </div>
-            <div class="col">
+                </dl>
+            </div>
+            <div class="col-sm-4">
+                <dl>
+                    <dt class="col-sm-2 font2b">
+                        @Html.DisplayNameFor(model => model.Perfil.fotoPath)
+                    </dt>
+                    <dd class="col-sm-10 font2">
+                        <img src="@photoPath" style="border:2px solid;max-height:200px " asp-append-version="true" />
+                    </dd>
+                </dl>
                 <div class="box border" style="margin:2EM 0">
                     <table class="table-striped font2">
                         <thead class="table-dark">
@@ -148,19 +156,10 @@
                     </table>
                 </div>
             </div>
-            <div class="col">
-                <dl>
-                    <dt class="col-sm-2 font2b">
-                        @Html.DisplayNameFor(model => model.Perfil.fotoPath)
-                    </dt>
-                    <dd class="col-sm-10 font2">
-                        <img src="@photoPath" style="border:2px solid;max-height:200px " asp-append-version="true" />
-                    </dd>
-                </dl>
-            </div>
+           
         </div>
         <div>
-            <a asp-action="Edit" asp-route-id="@Model.Perfil.ID" class="btn btn-primary font2">Editar</a>
+            <a asp-action="Edit" asp-route-id="@Model.Perfil.ID" class="btn btn-primary font2">Editar</a><br />
             <a class="font2 " asp-action="Index">Volver a la Lista</a>
         </div>
     </div>

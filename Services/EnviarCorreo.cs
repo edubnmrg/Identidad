@@ -45,7 +45,10 @@ namespace Identidad.Services
                 using (var emailClient = new SmtpClient())
                 {
                     emailClient.Connect("smtp.gmail.com", 587, false);
-                    emailClient.Authenticate("5QuillasJCRC@gmail.com", "Gma5ben$");
+                    //emailClient.Authenticate("5QuillasJCRC@gmail.com", "Gma5ben$");
+                    emailClient.Authenticate("eduardoben@gmail.com", "Gma5ben$");
+                    //emailClient.Connect("smtp.postmarkapp.com", 587, false);
+                    //emailClient.Authenticate("CasinJCRC@outlook.com,ar", "Out5ben$");
                     emailClient.Send(message);
                     emailClient.Disconnect(true);
                 }

@@ -13,6 +13,9 @@
         <table class="table table-striped font2">
             <thead class="table-dark">
                 <tr class="font2b">
+                     <th>
+                        @Html.DisplayNameFor(model => model.fotoPath)
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.nombre)
                     </th>
@@ -51,9 +54,7 @@
                         @Html.DisplayNameFor(model => model.club)
                     </th>
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.fotoPath)
-                    </th>
+                   
                     <th>
 
                     </th>
@@ -68,6 +69,9 @@
                     var photoPath = "~/img/fotosPerfiles/" + (item.fotoPath ?? "5q.png");
 
                     <tr>
+                        <td>
+                            <img id="perfilFoto" src="@photoPath" style="border:2px solid;max-height:100px" asp-append-version="true" />
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.nombre)
                         </td>
@@ -115,9 +119,7 @@
                                 <img id="perfilFoto" style="border:2px solid;max-height:100px" />
                             }
                         </td>*@
-                        <td>
-                            <img id="perfilFoto" src="@photoPath" style="border:2px solid;max-height:100px" asp-append-version="true" />
-                        </td>
+                        
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
                             <a asp-action="Details" asp-route-id="@item.ID">Detalle</a> |

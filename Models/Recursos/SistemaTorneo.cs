@@ -17,7 +17,7 @@ namespace Identidad.Models.Recursos
         [Required, Display(Name = "Puntos")]
         public int Puntos { get; set; }
 
-        public List<Torneo2> Torneos { get; set; }
+        //public List<Torneo2> Torneos { get; set; }
 
     }
 }

@@ -32,6 +32,15 @@ namespace Identidad.Models
         [ForeignKey("SistemaTorneo"), Display(Name = "Sistema")]
         public int SisTorRefId { get; set; }
         public SistemaTorneo SisTor { get; set; }
+        [ForeignKey("SistemaZona"), Display(Name = "Sistema")]
+        public int SisZonRefId { get; set; }
+        public SistemaZona SisZon { get; set; }
+        //[Required]
+        [Display(Name = "Sets")]
+        public int Sets { get; set; }
+        //[Required]
+        [Display(Name = "Puntos")]
+        public int Puntos { get; set; }
         [Required]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yy}"), Display(Name = "Desde")]
         public DateTime Desde { get; set; }
@@ -52,6 +61,7 @@ namespace Identidad.Models
         public bool CrucesCerrados { get; set; }
         [Display(Name = "T. Cerr")]
         public bool TorneoCerrado { get; set; }
+
         public List<Anotacion> Anotaciones { get; set; }
         public List<Partido> Matches { get; set; }
         public List<Zone> Zones { get; set; }

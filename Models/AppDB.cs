@@ -82,6 +82,8 @@ namespace Identidad.Models
         public DbSet<ApoderadoFederacion> ApoderadosFederacion { get; set; }
         public DbSet<PresidenteClub> PresidentesClub { get; set; }
         public DbSet<ApoderadoClub> ApoderadosClub { get; set; }
+        public DbSet<Horario> Horarios { get; set; }
+        public DbSet<ZonaManual> ZonasManuales { get; set; }
 
     }
 }

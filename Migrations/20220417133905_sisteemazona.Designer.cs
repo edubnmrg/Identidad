@@ -4,14 +4,16 @@ using Identidad.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Identidad.Migrations
 {
     [DbContext(typeof(AppDB))]
-    partial class AppDBModelSnapshot : ModelSnapshot
+    [Migration("20220417133905_sisteemazona")]
+    partial class sisteemazona
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -361,23 +363,6 @@ namespace Identidad.Migrations
                     b.HasIndex("TorneoId");
 
                     b.ToTable("GaleriasTorneos");
-                });
-
-            modelBuilder.Entity("Identidad.Models.Horario", b =>
-                {
-                    b.Property<int>("HorarioId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("horario")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(16)")
-                        .HasMaxLength(16);
-
-                    b.HasKey("HorarioId");
-
-                    b.ToTable("Horarios");
                 });
 
             modelBuilder.Entity("Identidad.Models.Inscripcion", b =>
@@ -865,23 +850,6 @@ namespace Identidad.Migrations
                     b.ToTable("SistemasTorneos");
                 });
 
-            modelBuilder.Entity("Identidad.Models.Recursos.SistemaZona", b =>
-                {
-                    b.Property<int>("SisZonId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Sistema")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.HasKey("SisZonId");
-
-                    b.ToTable("SistemaZona");
-                });
-
             modelBuilder.Entity("Identidad.Models.Recursos.TipoDocumento", b =>
                 {
                     b.Property<int>("ID")
@@ -1043,19 +1011,7 @@ namespace Identidad.Migrations
                         .HasColumnType("nvarchar(512)")
                         .HasMaxLength(512);
 
-                    b.Property<int>("Puntos")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Sets")
-                        .HasColumnType("int");
-
                     b.Property<int>("SisTorRefId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SisZonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SisZonRefId")
                         .HasColumnType("int");
 
                     b.Property<bool>("TorneoCerrado")
@@ -1081,8 +1037,6 @@ namespace Identidad.Migrations
                     b.HasIndex("CanJugcantJugID");
 
                     b.HasIndex("ClubRefId");
-
-                    b.HasIndex("SisZonId");
 
                     b.HasIndex("catTorneoID");
 
@@ -1212,74 +1166,6 @@ namespace Identidad.Migrations
                     b.HasIndex("ZoneZonaID");
 
                     b.ToTable("ZonasJugadores");
-                });
-
-            modelBuilder.Entity("Identidad.Models.ZonaManual", b =>
-                {
-                    b.Property<int>("ZonaManualId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Ganador1")
-                        .HasColumnType("nvarchar(32)")
-                        .HasMaxLength(32);
-
-                    b.Property<int>("Ganador2")
-                        .HasColumnType("int")
-                        .HasMaxLength(32);
-
-                    b.Property<int>("GanadorZona")
-                        .HasColumnType("int")
-                        .HasMaxLength(32);
-
-                    b.Property<string>("Jugador1")
-                        .HasColumnType("nvarchar(32)")
-                        .HasMaxLength(32);
-
-                    b.Property<string>("Jugador2")
-                        .HasColumnType("nvarchar(32)")
-                        .HasMaxLength(32);
-
-                    b.Property<string>("Jugador3")
-                        .HasColumnType("nvarchar(32)")
-                        .HasMaxLength(32);
-
-                    b.Property<string>("Jugador4")
-                        .HasColumnType("nvarchar(32)")
-                        .HasMaxLength(32);
-
-                    b.Property<int>("Numero")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Perdedor1")
-                        .HasColumnType("int")
-                        .HasMaxLength(32);
-
-                    b.Property<int>("Perdedor2")
-                        .HasColumnType("int")
-                        .HasMaxLength(32);
-
-                    b.Property<int>("Repechaje1")
-                        .HasColumnType("int")
-                        .HasMaxLength(32);
-
-                    b.Property<int>("Repechaje2")
-                        .HasColumnType("int")
-                        .HasMaxLength(32);
-
-                    b.Property<int>("SegundoZona")
-                        .HasColumnType("int")
-                        .HasMaxLength(32);
-
-                    b.Property<int>("TorneoID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ZonaManualId");
-
-                    b.HasIndex("TorneoID");
-
-                    b.ToTable("ZonasManuales");
                 });
 
             modelBuilder.Entity("Identidad.Models.Zone", b =>
@@ -1769,11 +1655,6 @@ namespace Identidad.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Identidad.Models.Recursos.SistemaZona", "SisZon")
-                        .WithMany()
-                        .HasForeignKey("SisZonId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("Identidad.Models.Recursos.CategoriaTorneo", "CatTor")
                         .WithMany("Torneos")
                         .HasForeignKey("catTorneoID")
@@ -1785,7 +1666,7 @@ namespace Identidad.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Identidad.Models.Recursos.SistemaTorneo", "SisTor")
-                        .WithMany()
+                        .WithMany("Torneos")
                         .HasForeignKey("sisTorID")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
@@ -1817,15 +1698,6 @@ namespace Identidad.Migrations
                         .WithMany()
                         .HasForeignKey("ZoneZonaID")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Identidad.Models.ZonaManual", b =>
-                {
-                    b.HasOne("Identidad.Models.Torneo2", "Torneo")
-                        .WithMany()
-                        .HasForeignKey("TorneoID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Identidad.Models.Zone", b =>
