@@ -1,57 +1,72 @@
-﻿@model IEnumerable<Identidad.Models.Perfil>
+﻿@model PerfilList
 
 @{
     ViewData["Title"] = "Perfiles";
 }
 
-    <div class="container-fluid" style="margin-left:3EM">
-        <h1>Perfiles</h1>
-
-
+    <div class="container-fluid" style="margin-left:3EM;display:inline-block">
+        <table>
+            <tr>
+                <td>
+                    <h1>Jugadores</h1>
+                </td>
+                <td>
+                     <select asp-for="JuegoDeseado" class="form-control font2" style="width:15rem">
+                        <option value="0" >Todos</option>
+                        @foreach (Juego i in ViewBag.Juegos)
+                        {
+                            <option value="@i.JuegoID" >@i.nombreJuego</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select asp-for="ClubDeseado" class="form-control font2" style="width:25rem">
+                        <option value="0" >Todos</option>
+                        @foreach (Club i in ViewBag.Clubes)
+                        {
+                            <option value="@i.ClubID" >@i.NombreClub</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select asp-for="CiudadDeseada" class="form-control font2" style="width:25rem">
+                        <option value="0" >Todos</option>
+                        @foreach (Ciudad i in ViewBag.Ciudades)
+                        {
+                            <option value="@i.CiudadID" >@i.nombre</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select asp-for="CategoriaDeseada" class="form-control font2" style="width:25rem">
+                        <option value="0" >Todas</option>
+                        @foreach (Categoria i in ViewBag.Ciudades)
+                        {
+                            <option value="@i.categoriaID" >@i.categoria</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+        </table>
+        
         <a class="font2" asp-action="Create">Agregar</a>
 
         <table class="table table-striped font2">
             <thead class="table-dark">
                 <tr class="font2b">
                      <th>
-                        @Html.DisplayNameFor(model => model.fotoPath)
+                        Foto
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.nombre)
+                        Apellido
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.apellido)
+                        Nombre
                     </th>
+                    
+                    
                     <th>
-                        @Html.DisplayNameFor(model => model.tDocID)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.numeroDocumento)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.calle)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.altura)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ciudad)
-                    </th>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.Provincia.nombre)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Email)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.telefono)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.celular)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.club)
+                        Club
                     </th>
 
                    
@@ -64,7 +79,7 @@
 
 
 
-                @foreach (var item in Model)
+                @foreach (var item in Model.Perfiles)
                 {
                     var photoPath = "~/img/fotosPerfiles/" + (item.fotoPath ?? "5q.png");
 
@@ -72,40 +87,14 @@
                         <td>
                             <img id="perfilFoto" src="@photoPath" style="border:2px solid;max-height:100px" asp-append-version="true" />
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nombre)
-                        </td>
-                        <td>
+                         <td>
                             @Html.DisplayFor(modelItem => item.apellido)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.tipoDeDocumento.Abreviacion)
+                            @Html.DisplayFor(modelItem => item.nombre)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.numeroDocumento)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.calle)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.altura)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ciudad)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Provincia.nombre)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.telefono)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.celular)
-                        </td>
+                       
+                        
                         <td>
                             @Html.DisplayFor(modelItem => item.club.NombreClub)
                         </td>
@@ -121,9 +110,10 @@
                         </td>*@
                         
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
-                            <a asp-action="Details" asp-route-id="@item.ID">Detalle</a> |
-                            <a asp-action="Delete" asp-route-id="@item.ID">Eliminar</a>
+                            <a asp-action="Details" asp-route-id="@item.ID">Detalle</a> 
+                            <!--<a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
+                            |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Eliminar</a>-->
                         </td>
                     </tr>
                 }

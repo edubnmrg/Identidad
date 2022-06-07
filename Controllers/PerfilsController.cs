@@ -31,11 +31,21 @@ namespace Identidad.Controllers
         // GET: Perfils
         public async Task<IActionResult> Index()
         {
-            var appDB = _context.Perfiles
+            PerfilList p = new PerfilList();
+            p.Perfiles = await _context.Perfiles
                 .Include(p => p.club)
                 .Include(p => p.Provincia)
-                .Include(p => p.tipoDeDocumento);
-            return View(await appDB.ToListAsync());
+                .Include(p => p.tipoDeDocumento).ToListAsync();
+            p.JuegoDeseado = 1;
+            p.CategoriaDeseada = 1;
+            p.ClubDeseado=1;
+            p.CiudadDeseada=1;  
+            //ViewBag.Juegos = new SelectList(_context.Juegoes, "Id", "nombreJuego");
+            ViewBag.Juegos = await _context.Juegoes.OrderBy(x=>x.nombreJuego).ToListAsync();
+            ViewBag.Clubes = await _context.Club.OrderBy(x => x.NombreClub).ToListAsync();
+
+            return View(p);
+
         }
 
         // GET: Perfils/Details/5

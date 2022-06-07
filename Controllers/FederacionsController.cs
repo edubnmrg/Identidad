@@ -42,6 +42,7 @@ namespace Identidad.Controllers
             
             federacion.ApoderadosFederacion = await _context.ApoderadosFederacion
                 .Where(a => a.FedID == federacion.FederacionID)
+                .Include(f => f.Perfil)
                 .ToListAsync();
             return View(federacion);
         }

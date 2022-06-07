@@ -42,6 +42,14 @@ namespace Identidad.Models
                .HasIndex(b => new { b.TorneoRefId, b.PerfilRefId }).IsUnique()
                .IsUnique()
                .HasName("IXPerTor");
+            modelBuilder.Entity<Afiliacion>()
+            .HasOne(s => s.Perfil)
+            .WithMany(c => c.Afiliaciones)
+            .HasForeignKey(s => s.PerfilId);
+            modelBuilder.Entity<Afiliacion>()
+            .HasOne(s => s.Autorizo)
+            .WithMany(c => c.AfiliacionesAut)
+            .HasForeignKey(s => s.AutId);
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
@@ -83,7 +91,7 @@ namespace Identidad.Models
         public DbSet<PresidenteClub> PresidentesClub { get; set; }
         public DbSet<ApoderadoClub> ApoderadosClub { get; set; }
         public DbSet<Horario> Horarios { get; set; }
-        public DbSet<ZonaManual> ZonasManuales { get; set; }
+        public DbSet<Afiliacion> Afiliaciones { get; set; }
 
     }
 }

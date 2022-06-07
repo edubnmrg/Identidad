@@ -74,8 +74,11 @@ namespace Identidad.Models
             }
         }
 
-        public List<Inscripcion> Inscriptos { get; set; }
-        public List<Anotacion> Anotaciones { get; set; }
+        public List<Inscripcion>? Inscriptos { get; set; }
+        public List<Anotacion>? Anotaciones { get; set; }
+        public List<Afiliacion>? Afiliaciones { get; set; }
+        public List<Afiliacion>? AfiliacionesAut { get; set; }
+        public List<CategoriaJugador>? Categorias { get; set; }
 
     }
 }

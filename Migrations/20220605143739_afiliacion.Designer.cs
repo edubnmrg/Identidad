@@ -4,14 +4,16 @@ using Identidad.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Identidad.Migrations
 {
     [DbContext(typeof(AppDB))]
-    partial class AppDBModelSnapshot : ModelSnapshot
+    [Migration("20220605143739_afiliacion")]
+    partial class afiliacion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +38,7 @@ namespace Identidad.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Importe")
-                        .HasColumnType("decimal(16 ,0)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("PerfilId")
                         .HasColumnType("int");
